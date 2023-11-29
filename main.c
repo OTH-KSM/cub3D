@@ -6,13 +6,13 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:11 by okassimi          #+#    #+#             */
-/*   Updated: 2023/11/29 10:32:47 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:01:29 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
 int main(int argc, char *argv[])  {
-    if (_check_file_extention(argc, argv))
+    if (_ValidateInputAndFile(argc, argv))
         return (-1);
 }
