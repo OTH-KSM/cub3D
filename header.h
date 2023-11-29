@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/11/29 11:00:45 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/11/29 11:58:20 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include "fcntl.h"
 
 int	_ValidateInputAndFile(int argc, char *argv[]);
-
+int _ValidateFileContent(char *argv);
 
 #endif

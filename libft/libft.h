@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 02:47:43 by okassimi          #+#    #+#             */
-/*   Updated: 2022/11/13 10:36:38 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:04:27 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,31 @@
 # include <stdio.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <limits.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+//    ***    Get_next_line Part    **
+typedef struct s_struct
+{
+	char		*temp;
+	char		*buffer;
+	char		*line;
+	int			rdd;
+	int			jeton;
+	int			j;
+	int			check;
+}t_pos;
+
+char	*get_next_line(int fd);
+char	*ft_gnlstrjoin(char *s1, char *s2);
+char	*ft_gnlstrchr(char *s, int c);
+char	*ft_gnlsubstr(char *s, unsigned int start, size_t len);
+
+//    ***    Libft Part    **
+
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t n);
