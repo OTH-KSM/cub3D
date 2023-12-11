@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/11 10:52:17 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:45:17 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,6 @@ typedef struct	s_elemlist	{
 int	_ValidateInputAndFile(int argc, char *argv[]);
 int _ValidateFileContent(char *argv);
 int*	_ReturnStatistics(char *argv);
-int	_CheckEelements(char *argv, int last);
+t_elist	*_CheckEelements(char *argv, int last);
 
 #endif

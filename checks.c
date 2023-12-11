@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/11 10:57:57 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/11 17:59:00 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,22 @@ int	_ValidateInputAndFile(int argc, char *argv[])	{
 }
 
 int _ValidateFileContent(char *argv)	{
-	int length = _ReturnStatistics(argv)[0];
+	// int length = _ReturnStatistics(argv)[0];
 	int lines = _ReturnStatistics(argv)[1];
 	int lastline = _ReturnStatistics(argv)[2];
-	printf("length: %d\nlines: %d\nlastline: %d\n",length, lines, lastline);
+	// printf("length: %d\nlines: %d\nlastline: %d\n",length, lines, lastline);
 	if (lines == 0)	{
 		write(2, "Error: File Empty\n", 18);
 		exit (1);
 	}
-
-	_CheckEelements(argv, lastline);
+	t_elist *head = _CheckEelements(argv, lastline);
+	printf("Finishing Filling\n");
+	while (head)	{
+		printf("---------------------------------------------\n");
+		printf("%s\n%s\n%s\n%s\n", head->Key, head->Value1, head->Value2, head->Value3);
+		head = head->next_elem;
+	}
+	exit(0);
 
 	return (0);
 }
@@ -75,7 +81,6 @@ int*	_ReturnStatistics(char *argv)	{
 }
 
 t_elist*	_InializeLinkedList()	{
-	char	*names[6] = {"NO", "SO", "WE", "EA", "F", "C"};
 	int		i = 0;
 	t_elist *elem;
 	t_elist *head;
@@ -84,7 +89,7 @@ t_elist*	_InializeLinkedList()	{
 	head = elem;
 	while (i < 6)	{
 		elem->found = 0;
-		elem->Key = names[i];
+		elem->Key = NULL;
 		elem->Value1 = NULL;
 		elem->Value2 = NULL;
 		elem->Value3 = NULL;
@@ -98,65 +103,77 @@ t_elist*	_InializeLinkedList()	{
 	}
 	return (head);
 }
-// printf("Finishing Filling\n");
-// while (head)	{
-// 	printf("%s %d\n", head->Key, head->found);
-// 	head = head->next_elem;
-// }
-// exit(0);
+
 
 bool	_ItMatch(char *sample, char **solutions)	{
-	int len = ft_strlen(sample);
 	// printf("\"%s\"\n%s\n%s\n%s\n%s\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
-	if (len == 1 || len == 2)	{
-		if (len == 1 && (sample[0] == 'F' || sample[0] == 'C'))
-			return (true);
-		else if (len == 2 && (!ft_strncmp(sample, solutions[0], 2) || !ft_strncmp(sample, solutions[1], 2)
-		|| !ft_strncmp(sample, solutions[2], 2) || !ft_strncmp(sample, solutions[3], 2)))
-			return (true);
-		else
-			return (false);
-	}
+	if (!ft_strncmp(sample, solutions[0], 3) || !ft_strncmp(sample, solutions[1], 3)
+	|| !ft_strncmp(sample, solutions[2], 3) || !ft_strncmp(sample, solutions[3], 3))
+		return (true);
 	else
 		return (false);
-
 }
 
 
-int	_CheckEelements(char *argv, int last)	{
+t_elist	*_CheckEelements(char *argv, int last)	{
 	int fd = open(argv, O_RDONLY);
 	int i = 0;
+	t_elist *head;
 	t_elist *elem = _InializeLinkedList();
+	head = elem;
+	char	*line;
 	char	**splited;
-	printf("---------------------------------------------\n");
+	int		len;
 	while (i < last)	{
-		splited = ft_split(get_next_line(fd), ' ');
-		if (splited[0] && *splited[0] != '\n')
+		line = get_next_line(fd);
+		if (line && line[0] != '\n')
 		{
-			if (!_ItMatch(splited[0], ft_split("NO SO WE EA", ' ')))	{ // [99%] Maybe i should free the splite passed to ItMatch an of course i should free the splited
-				write(2, "Wrong Type of Element\n", 22);
-				exit (1);
+			len = ft_strlen(line);
+			if (line[len - 1] == '\n')	{ // i should free the first "line"
+				line = ft_substr(line, 0, len - 1);
 			}
-			if (!elem)	{
-				write(2, "Too many Type of Elements\n", 26);	// i should also free the splitedand elem
-				exit (1);
-			}
-			elem->Key = splited[0];
-			if (splited[1])	{
-				elem->Value1 = splited[1];
-				if (splited[2])	{
-					elem->Value2 = splited[2];
-					if (splited[3])	{
-						elem->Value3 = splited[3];
+			if (elem)	{
+				if (_ItMatch(line, ft_split("NO -SO -WE -EA ", '-')))	{ 
+					splited = ft_split(line, ' ');
+					elem->Key = splited[0];
+					if (splited[1])	{
+						elem->Value1 = splited[1];
+						if (splited[2])	{
+							write(2, "Error\nToo many Directions Arguments", 35);
+							exit (0);
+						}
 					}
 				}
+				else if ((line[0] == 'F' || line[0] == 'C') && line[1] && line[1] == ' ')	{
+					splited = ft_split(ft_strtrim(line + 1, " "), ',');
+					elem->Key = ft_substr(line, 0, 1);
+					if (splited[0])	{
+						elem->Value1 = ft_strtrim(splited[0], " ");
+						if (splited[1])	{
+							elem->Value2 = ft_strtrim(splited[1], " ");
+							if (splited[2])	{
+								elem->Value3 = ft_strtrim(splited[2], " ");
+								if (splited[3])	{
+									write(2, "Error\nToo Many Colors Arguments\n", 33);
+									exit (0);
+								}
+							}
+						}
+					}
+				}
+				else	{
+					write(2, "Error\nWrong Type of Element\n", 28);	
+					exit (1);
+				}
+				elem = elem->next_elem;
 			}
-			printf("%s-\n%s-\n%s-\n%s-\n", elem->Key, elem->Value1, elem->Value2, elem->Value3);
-			printf("---------------------------------------------\n");
-			elem = elem->next_elem;
+			else	{
+				write(2, "Error\nToo Many Map Type of Elements\n", 36);
+				exit (1);
+			}
 		}
 		i++;
 	}
-	return (0);
+	return (head);
 }
 
