@@ -1,10 +1,10 @@
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 SRC = checks.c main.c 
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
 NAME = cub3D
 
-all: $(LIBFT) $(NAME)
+all: $(LIBFT) $(NAME) clean
 	-@# -Lmlx -lmlx -framework OpenGL -framework AppKit
 	-@echo "Cub3D is ready to play!"
 
