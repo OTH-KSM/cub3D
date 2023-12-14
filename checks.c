@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/11 17:59:00 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/14 11:28:53 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	_ValidateInputAndFile(int argc, char *argv[])	{
 	return (0);
 }
 
+
+
 int _ValidateFileContent(char *argv)	{
 	// int length = _ReturnStatistics(argv)[0];
 	int lines = _ReturnStatistics(argv)[1];
@@ -41,16 +43,19 @@ int _ValidateFileContent(char *argv)	{
 		exit (1);
 	}
 	t_elist *head = _CheckEelements(argv, lastline);
+	
 	printf("Finishing Filling\n");
 	while (head)	{
 		printf("---------------------------------------------\n");
 		printf("%s\n%s\n%s\n%s\n", head->Key, head->Value1, head->Value2, head->Value3);
+		printf("%d\n", head->found);
 		head = head->next_elem;
 	}
 	exit(0);
 
 	return (0);
 }
+
 
 int*	_ReturnStatistics(char *argv)	{
 	int *stats;
@@ -105,15 +110,41 @@ t_elist*	_InializeLinkedList()	{
 }
 
 
-bool	_ItMatch(char *sample, char **solutions)	{
+bool	_ItMatchDir(t_elist *elem, char *sample, char **solutions)	{
 	// printf("\"%s\"\n%s\n%s\n%s\n%s\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
+	static int count[4]; // [NO, SO, WE, EA]
 	if (!ft_strncmp(sample, solutions[0], 3) || !ft_strncmp(sample, solutions[1], 3)
 	|| !ft_strncmp(sample, solutions[2], 3) || !ft_strncmp(sample, solutions[3], 3))
+	{
+		if (!ft_strncmp(sample, solutions[0], 3))
+			elem->found = ++(count[0]);
+		else if (!ft_strncmp(sample, solutions[1], 3))
+			elem->found = ++(count[1]);
+		else if  (!ft_strncmp(sample, solutions[2], 3))
+			elem->found = ++(count[2]);
+		else if  (!ft_strncmp(sample, solutions[3], 3))
+			elem->found = ++(count[3]);
 		return (true);
+	}
 	else
 		return (false);
 }
 
+bool	_ItMatchCol(t_elist *elem, char *sample, char **solutions)	{
+	// printf("\"%s\"\n%s\n%s\n%s\n%s\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
+	static int count[2]; // [F, C]
+	if (!ft_strncmp(sample, solutions[0], 2) || !ft_strncmp(sample, solutions[1], 2)
+	|| !ft_strncmp(sample, solutions[2], 2) || !ft_strncmp(sample, solutions[3], 2))
+	{
+		if (!ft_strncmp(sample, solutions[0], 2))
+			elem->found = ++(count[0]);
+		else if (!ft_strncmp(sample, solutions[1], 2))
+			elem->found = ++(count[1]);
+		return (true);
+	}
+	else
+		return (false);
+}
 
 t_elist	*_CheckEelements(char *argv, int last)	{
 	int fd = open(argv, O_RDONLY);
@@ -129,22 +160,25 @@ t_elist	*_CheckEelements(char *argv, int last)	{
 		if (line && line[0] != '\n')
 		{
 			len = ft_strlen(line);
+			// ISSUE #2
+			// ISSUE #3
+			// ISSUE #4
 			if (line[len - 1] == '\n')	{ // i should free the first "line"
 				line = ft_substr(line, 0, len - 1);
 			}
 			if (elem)	{
-				if (_ItMatch(line, ft_split("NO -SO -WE -EA ", '-')))	{ 
+				if (_ItMatchDir(elem, line, ft_split("NO -SO -WE -EA ", '-')))	{ 
 					splited = ft_split(line, ' ');
 					elem->Key = splited[0];
 					if (splited[1])	{
 						elem->Value1 = splited[1];
 						if (splited[2])	{
-							write(2, "Error\nToo many Directions Arguments", 35);
-							exit (0);
+							write(2, "Error\nToo many Directions Arguments\n", 36);
+							exit (1);
 						}
 					}
 				}
-				else if ((line[0] == 'F' || line[0] == 'C') && line[1] && line[1] == ' ')	{
+				else if (_ItMatchCol(elem, line, ft_split("C -F ", '-')))	{
 					splited = ft_split(ft_strtrim(line + 1, " "), ',');
 					elem->Key = ft_substr(line, 0, 1);
 					if (splited[0])	{
@@ -174,6 +208,12 @@ t_elist	*_CheckEelements(char *argv, int last)	{
 		}
 		i++;
 	}
+	// elem = head;
+	// int	count[6]; // [NO, SO, WE, EA, F, C]
+	// ft_bzero(count, 24);
+	// while (elem)	{
+			
+	// }
 	return (head);
 }
 
