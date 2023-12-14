@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/14 17:08:56 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/14 18:49:40 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_elist*	_InializeLinkedList()	{
 
 
 bool	_ItMatchDir(t_elist *elem, char *sample, char **solutions, int token)	{
-	printf("1: \"%s\"\n%s\n%s\n%s\n%s\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
+	// printf("1: \"%s\"\n%s\n%s\n%s\n%s\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
 	static int count[4]; // [NO, SO, WE, EA]
 	if (!ft_strncmp(sample, solutions[0], 3) || !ft_strncmp(sample, solutions[1], 3)
 	|| !ft_strncmp(sample, solutions[2], 3) || !ft_strncmp(sample, solutions[3], 3))
@@ -134,10 +134,14 @@ bool	_ItMatchDir(t_elist *elem, char *sample, char **solutions, int token)	{
 }
 
 bool	_ItMatchCol(t_elist *elem, char *sample, char **solutions, int token)	{
-	printf("joojojojojo\n\n\n");
-	// printf("2: \"%p\"\n%p\n%p\n%p\n%p\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
 	static int count[2]; // [F, C]
-	printf("mamamammamma\n\n\n");
+	// int i = 0;
+	// while (sample[i])
+	// {
+	// 	printf("%c : %d\n", sample[i], sample[i]);
+	// 	printf("%c : %d\n", solution[])
+	// 	i++;
+	// }
 	if (!ft_strncmp(sample, solutions[0], 2) || !ft_strncmp(sample, solutions[1], 2)
 	|| !ft_strncmp(sample, solutions[2], 2) || !ft_strncmp(sample, solutions[3], 2))
 	{
@@ -187,7 +191,7 @@ t_elist	*_CheckEelements(char *argv, int last)	{
 					}
 					elem->Genre = 0;
 				}
-				else if (_ItMatchCol(elem, line, ft_split("C -F ", '-'), 1))	{
+				else if (_ItMatchCol(elem, line, ft_split("C -F -F\t-C\t", '-'), 1))	{
 					splited = ft_split(ft_strtrim(line + 1, " "), ',');
 					elem->Key = ft_substr(line, 0, 1);
 					if (splited[0])	{
@@ -206,6 +210,7 @@ t_elist	*_CheckEelements(char *argv, int last)	{
 					elem->Genre = 1;
 				}
 				else	{
+					printf("|%s|\n", line);
 					write(2, "Error\nWrong Type of Element\n", 28);	
 					exit (1);
 				}

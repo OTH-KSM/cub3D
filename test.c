@@ -1,6 +1,20 @@
 #include "header.h"
 
+int main1(void)  {
+    char *str;
+    int i = 0;
+    str = malloc(5 * sizeof(char));
+    while (i < 5)   {
+        str[i] = '5';
+        i++;
+    }
+    char *line1 = ft_strtrim(str, "\t");
+    char *line2 = ft_strtrim(line1, " ");
+    printf("%s\n", line2);
+    return (0);
+}
+
 int main(void)  {
-    char *str = "                       ";
-    printf("%c\n", ft_strtrim(str, " ")[0]);
+    main1(); 
+    system("leaks a.out");
 }
