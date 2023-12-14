@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 02:38:13 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/14 18:59:46 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/14 20:12:34 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static	int	first(char *a, char *b);
 static	int	last(char *a, char *b);
-// nothing changed
+// doing nothing
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	char	*s;

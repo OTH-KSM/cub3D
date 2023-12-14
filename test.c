@@ -9,8 +9,7 @@ int main1(void)  {
         i++;
     }
     char *line1 = ft_strtrim(str, "\t");
-    char *line2 = ft_strtrim(line1, " ");
-    printf("%s\n", line2);
+    free(line1);
     return (0);
 }
 
