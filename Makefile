@@ -2,16 +2,17 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
 SRC = checks.c main.c 
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
+OLIBFT = libft/*.c
 NAME = cub3D
 
-all: $(LIBFT) $(NAME) clean
+all: $(LIBFT) $(NAME)
 	-@# -Lmlx -lmlx -framework OpenGL -framework AppKit
 	-@echo "Cub3D is ready to play!"
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(LIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBFT)
 
-$(LIBFT) :
+$(LIBFT) : $(OLIBFT)
 	-@echo "Compiling libft..."
 	@make -C libft -s
 

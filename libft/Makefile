@@ -10,7 +10,7 @@ all : $(NAME)
 $(NAME) : $(OBJ)
 	ar -rc $(NAME) $(OBJ)
 clean :
-	rm -fr $(OBJ) 
+	rm -fr $(OBJ)
 
 fclean : clean
 	rm -rf $(NAME)

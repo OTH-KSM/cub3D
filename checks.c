@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/14 13:01:42 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/14 17:08:56 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ t_elist*	_InializeLinkedList()	{
 
 
 bool	_ItMatchDir(t_elist *elem, char *sample, char **solutions, int token)	{
-	// printf("\"%s\"\n%s\n%s\n%s\n%s\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
+	printf("1: \"%s\"\n%s\n%s\n%s\n%s\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
 	static int count[4]; // [NO, SO, WE, EA]
 	if (!ft_strncmp(sample, solutions[0], 3) || !ft_strncmp(sample, solutions[1], 3)
 	|| !ft_strncmp(sample, solutions[2], 3) || !ft_strncmp(sample, solutions[3], 3))
@@ -134,8 +134,10 @@ bool	_ItMatchDir(t_elist *elem, char *sample, char **solutions, int token)	{
 }
 
 bool	_ItMatchCol(t_elist *elem, char *sample, char **solutions, int token)	{
-	// printf("\"%s\"\n%s\n%s\n%s\n%s\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
+	printf("joojojojojo\n\n\n");
+	// printf("2: \"%p\"\n%p\n%p\n%p\n%p\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
 	static int count[2]; // [F, C]
+	printf("mamamammamma\n\n\n");
 	if (!ft_strncmp(sample, solutions[0], 2) || !ft_strncmp(sample, solutions[1], 2)
 	|| !ft_strncmp(sample, solutions[2], 2) || !ft_strncmp(sample, solutions[3], 2))
 	{
@@ -219,13 +221,15 @@ t_elist	*_CheckEelements(char *argv, int last)	{
 	elem = head;
 	while (elem)	{
 		if (elem->found != 1)	{
-			write(1, "Error\nElement Repetition\n", 25); // i should free someting before exiting
+			write(1, "Error\nMissing Elements or Elements Repetition\n", 46); // i should free someting before exiting
 			exit (1);
 		}
-		// if (_ItMatchCol(elem, elem->Key, ft_split("C -F ", '-'), 0))
-		// 	_CheckColValues(elem);
 		if (elem->Genre == 0)	{
 			if (_CheckDirValues(elem) == -1)
+				exit (1);
+		}
+		else if (elem->Genre == 1)	{
+			if (_CheckColValues(elem) == -1)
 				exit (1);
 		}
 		elem = elem->next_elem;
@@ -238,18 +242,49 @@ int	_CheckDirValues(t_elist *elem)	{
 	if (elem->Value1)	{
 		len = ft_strlen(elem->Value1);
 		if (len <= 4 || (len > 4 && strncmp(elem->Value1 + len - 4, ".xpm", 4)))	{
-			// printf("%d\n", strncmp(elem->Value1 + len - 4, ".xpm", 4));
-			write(2, "Error\nDirection Elements Extention Are not Valid\n", 49);
+			write(2, "Error\nDirection Elements's Path Are not Valid\n", 49);
 			return (-1);
 		}
 		else if ((open(elem->Value1, O_RDONLY)) == 	-1)	{
-			write(2, "Error\nOpening Path file\n", 24);
+			write(2, "Error\nDirections Elements's Path can't open\n", 44);
 			return (-1);
 		}
 	}
 	else	{
-		write(2, "Error\nMissing Path For Direction Element\n", 41);
+		write(2, "Error\nMissing Directions's elements Path\n", 41);
 		return (-1);
+	}
+	return (0);
+}
+
+int _isDigit(char *str)	{
+	int i = 0;
+	while (str[i])	{
+		if (!ft_isdigit(str[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	_CheckColValues(t_elist *elem)	{
+	int a1, a2, a3;
+	if (!elem->Value1 || !elem->Value2 || !elem->Value3)	{
+		write(2, "Error\nMissing Colors's elements Values\n", 39);
+		return (-1);
+	}
+	else {
+		if (_isDigit(elem->Value1) || _isDigit(elem->Value2) || _isDigit(elem->Value3))	{
+			write(2, "Error\nColors elements's Values are not digits\n", 46);
+			return (-1);
+		}
+		a1 = ft_atoi(elem->Value1);
+		a2 = ft_atoi(elem->Value2);
+		a3 = ft_atoi(elem->Value3);
+		if (!(a1 >= 0 && a1 <= 255) || !(a2 >= 0 && a2 <= 255) || !(a3 >= 0 && a3 <= 255))	{
+			write(2, "Error\nColors elements's Values are out of range\n", 48);
+			return (-1);
+		}
 	}
 	return (0);
 }
