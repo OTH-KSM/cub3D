@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/14 20:22:16 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/16 10:53:18 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int _ValidateFileContent(char *argv)	{
     int lines = _ReturnStatistics(argv)[1];
     int lastline = _ReturnStatistics(argv)[2];
     // printf("length: %d\nlines: %d\nlastline: %d\n",length, lines, lastline);
+    // exit (0);
     if (lines == 0)	{
         write(2, "Error: File Empty\n", 18);
         exit (1);
@@ -239,7 +240,7 @@ int	_CheckDirValues(t_elist *elem)	{
     if (elem->Value1)	{
         len = ft_strlen(elem->Value1);
         if (len <= 4 || (len > 4 && strncmp(elem->Value1 + len - 4, ".xpm", 4)))	{
-            write(2, "Error\nDirection Elements's Path Are not Valid\n", 49);
+            write(2, "Error\nDirection Elements's Path Are not Valid\n", 46);
             return (-1);
         }
         else if ((open(elem->Value1, O_RDONLY)) == 	-1)	{
