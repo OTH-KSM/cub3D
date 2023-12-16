@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/16 13:21:08 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/16 18:08:52 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,43 +31,42 @@ int	_ValidateInputAndFile(int argc, char *argv[])	{
     return (0);
 }
 
-
-// void    _CheckMap(char *argv, int length, int lines, int last)  {
-//     int fd = open(argv, O_RDONLY);
-//     int i = 0;
-//     int j = 0;
-//     char *str;
-//     char **map;
-//     (void)length;
-//     map = ft_calloc(lines - last + 1, sizeof(char *));
-//     while (i < lines)    {
-//         str = get_next_line(fd);
-//         if (i >= last)   {
-//             map[j] = ft_strdup(str);
-//             j++;
-//         }
-//         free(str);
-//         i++;
-//     }
-//     for (int k = 0; k < lines - last; k++)  {
-//         printf("%s", map[k]);
-//     } 
-//     exit (0);
-//     close(fd);
-// }
+void    _CheckMap(char *argv, int length, int lines, int last)  {
+    int fd = open(argv, O_RDONLY);
+    int i = 0;
+    int j = 0;
+    char *str;
+    char **map;
+    (void)length;
+    map = ft_calloc(lines - last + 1, sizeof(char *));
+    while (i < lines)    {
+        str = get_next_line(fd);
+        if (i >= last)   {
+            map[j] = ft_strdup(str);
+            j++;
+        }
+        free(str);
+        i++;
+    }
+    for (int k = 0; k < lines - last; k++)  {
+        printf("%s", map[k]);
+    }
+    exit (0);
+    close(fd);
+}
 
 int _ValidateFileContent(char *argv)	{
     int length = _ReturnStatistics(argv)[0];
     int lines = _ReturnStatistics(argv)[1];
-    int lastline = _ReturnStatistics(argv)[2];
-    printf("length: %d\nlines: %d\nlastline: %d\n",length, lines, lastline);
-    // exit (0);
+    int last = _ReturnStatistics(argv)[2];
+    printf("length: %d\nlines: %d\nlast: %d\n",length, lines, last);
+    exit (0);
     if (lines == 0)	{
         write(2, "Error: File Empty\n", 18);
         exit (1);
     }
-    t_elist *head = _CheckEelements(argv, lastline);
-    // _CheckMap(argv, length, lines, lastline);
+    t_elist *head = _CheckEelements(argv, last);
+    _CheckMap(argv, length, lines, last);
     printf("Finishing Filling\n");
     while (head)	{
         printf("---------------------------------------------\n");
@@ -80,31 +79,36 @@ int _ValidateFileContent(char *argv)	{
     return (0);
 }
 
-
 int*	_ReturnStatistics(char *argv)	{
     int *stats;
     int fd;
     int len;
     int jeton;
+    int token;
     char *tmp;
 
     fd = open(argv, O_RDONLY);
     stats = malloc(3 * sizeof(int));
     ft_bzero(stats, 12);
     len = 1;
-    jeton = 0; // [len, line, last]
+    jeton = 0; // [Maplen, line, last]
+    token = 0;
     while (1)	{
         tmp = get_next_line(fd);
-        if (stats[0] < (len = ft_strlen(tmp)))
-            stats[0] = len;
         if (!jeton && ft_strchr("10", ft_strtrim(tmp, " ")[0])) {
             jeton = 1;
+            token = 1;
             stats[2] = stats[1];
+        }
+        if (token)  {
+            if (stats[0] < (len = ft_strlen(tmp)))
+                stats[0] = len; 
         }
         if (len == 0)
             break ;
         stats[1]++;
     }
+    // exit (0);
     close(fd);
     return (stats);
 }
@@ -133,7 +137,6 @@ t_elist*	_InializeLinkedList()	{
     return (head);
 }
 
-
 bool	_ItMatchDir(t_elist *elem, char *sample, char **solutions, int token)	{
     // printf("1: \"%s\"\n%s\n%s\n%s\n%s\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
     static int count[4]; // [NO, SO, WE, EA]
@@ -161,7 +164,7 @@ bool	_ItMatchCol(t_elist *elem, char *sample, char **solutions, int token)	{
     static int count[2]; // [F, C]
     if (!ft_strncmp(sample, solutions[0], 2) || !ft_strncmp(sample, solutions[1], 2))
     {
-        if (token == 1)	{
+        if (token == 1) {
             if (!ft_strncmp(sample, solutions[0], 2))
                 elem->found = ++(count[0]);
             else if (!ft_strncmp(sample, solutions[1], 2))
