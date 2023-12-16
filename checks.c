@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/16 18:08:52 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/16 19:28:37 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,38 @@ int	_ValidateInputAndFile(int argc, char *argv[])	{
     return (0);
 }
 
-void    _CheckMap(char *argv, int length, int lines, int last)  {
+char    *_Fill(char *str, int maxlen)   {
+    char *new;
+    int i = 0;
+    int j;
+
+    new = ft_calloc(maxlen + 1, sizeof(char));
+    while (str[i] && str[i] != '\n')  {
+        new[i] = str[i];
+        i++;
+    }
+    j = i;
+    while (i < maxlen - 1) {
+        new[i] = '*';
+        i++;
+    }
+    if (str[j] == '\n')
+        new[i] = '\n';
+    return (new);
+}
+
+void    _CheckMap(char *argv, int maxlen, int lines, int last)  {
     int fd = open(argv, O_RDONLY);
     int i = 0;
     int j = 0;
     char *str;
     char **map;
-    (void)length;
+    
     map = ft_calloc(lines - last + 1, sizeof(char *));
-    while (i < lines)    {
+    while (i <= lines)    {
         str = get_next_line(fd);
-        if (i >= last)   {
-            map[j] = ft_strdup(str);
+        if (i > last)   {
+            map[j] = _Fill(str, maxlen);
             j++;
         }
         free(str);
@@ -52,29 +72,30 @@ void    _CheckMap(char *argv, int length, int lines, int last)  {
         printf("%s", map[k]);
     }
     exit (0);
+    printf("%d\n", maxlen);
     close(fd);
 }
 
 int _ValidateFileContent(char *argv)	{
-    int length = _ReturnStatistics(argv)[0];
+    int maxlen = _ReturnStatistics(argv)[0];
     int lines = _ReturnStatistics(argv)[1];
     int last = _ReturnStatistics(argv)[2];
-    printf("length: %d\nlines: %d\nlast: %d\n",length, lines, last);
-    exit (0);
+    printf("maxlen: %d\nlines: %d\nlast: %d\n",maxlen, lines, last);
+    // exit (0);
     if (lines == 0)	{
         write(2, "Error: File Empty\n", 18);
         exit (1);
     }
     t_elist *head = _CheckEelements(argv, last);
-    _CheckMap(argv, length, lines, last);
+    _CheckMap(argv, maxlen, lines, last);
     printf("Finishing Filling\n");
+    exit(0);
     while (head)	{
         printf("---------------------------------------------\n");
         printf("%s\n%s\n%s\n%s\n", head->Key, head->Value1, head->Value2, head->Value3);
         printf("%d\n", head->found);
         head = head->next_elem;
     }
-    exit(0);
 
     return (0);
 }
