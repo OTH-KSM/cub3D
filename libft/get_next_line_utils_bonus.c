@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:07:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/11/29 12:05:44 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:59:42 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ char	*ft_gnlsubstr(char *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s) || s[i] == '\0')
-		return (ft_strdup(""));
+		return (ft_gnlstrdup(""));
 	if (len > ft_strlen(s))
 		len = ft_strlen(s) - start;
 	s = s + start;
@@ -87,7 +87,7 @@ char	*ft_gnlsubstr(char *s, unsigned int start, size_t len)
 	return (p);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_gnlstrdup(const char *s1)
 {
 	char	*p;
 	size_t	i;

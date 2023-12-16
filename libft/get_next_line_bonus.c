@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:11:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/11/29 12:05:34 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:59:22 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	isthere_anl(char **temp, char **buffer, char *sta, int *j)
 {	
-	*buffer = ft_strdup("");
+	*buffer = ft_gnlstrdup("");
 	*temp = malloc(BUFFER_SIZE + 1 * sizeof(char));
 	if (!*temp || !*buffer)
 		return (-2);

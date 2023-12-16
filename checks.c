@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/16 10:53:18 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/16 13:21:08 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,42 @@ int	_ValidateInputAndFile(int argc, char *argv[])	{
 }
 
 
+// void    _CheckMap(char *argv, int length, int lines, int last)  {
+//     int fd = open(argv, O_RDONLY);
+//     int i = 0;
+//     int j = 0;
+//     char *str;
+//     char **map;
+//     (void)length;
+//     map = ft_calloc(lines - last + 1, sizeof(char *));
+//     while (i < lines)    {
+//         str = get_next_line(fd);
+//         if (i >= last)   {
+//             map[j] = ft_strdup(str);
+//             j++;
+//         }
+//         free(str);
+//         i++;
+//     }
+//     for (int k = 0; k < lines - last; k++)  {
+//         printf("%s", map[k]);
+//     } 
+//     exit (0);
+//     close(fd);
+// }
 
 int _ValidateFileContent(char *argv)	{
-    // int length = _ReturnStatistics(argv)[0];
+    int length = _ReturnStatistics(argv)[0];
     int lines = _ReturnStatistics(argv)[1];
     int lastline = _ReturnStatistics(argv)[2];
-    // printf("length: %d\nlines: %d\nlastline: %d\n",length, lines, lastline);
+    printf("length: %d\nlines: %d\nlastline: %d\n",length, lines, lastline);
     // exit (0);
     if (lines == 0)	{
         write(2, "Error: File Empty\n", 18);
         exit (1);
     }
     t_elist *head = _CheckEelements(argv, lastline);
-    
+    // _CheckMap(argv, length, lines, lastline);
     printf("Finishing Filling\n");
     while (head)	{
         printf("---------------------------------------------\n");
@@ -69,7 +92,7 @@ int*	_ReturnStatistics(char *argv)	{
     stats = malloc(3 * sizeof(int));
     ft_bzero(stats, 12);
     len = 1;
-    jeton = 0;
+    jeton = 0; // [len, line, last]
     while (1)	{
         tmp = get_next_line(fd);
         if (stats[0] < (len = ft_strlen(tmp)))
@@ -172,6 +195,7 @@ t_elist	*_CheckEelements(char *argv, int last)	{
                 line = ft_substr(line, 0, len - 1);
             }
             if (elem)	{
+                // TODO #8
                 if (_ItMatchDir(elem, line, ft_split("NO -SO -WE -EA ", '-'), 1))	{ 
                     splited = ft_split(line, ' ');
                     elem->Key = splited[0];

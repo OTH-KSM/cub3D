@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 02:47:43 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/14 20:12:51 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/16 12:59:06 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ char	*get_next_line(int fd);
 char	*ft_gnlstrjoin(char *s1, char *s2);
 char	*ft_gnlstrchr(char *s, int c);
 char	*ft_gnlsubstr(char *s, unsigned int start, size_t len);
+char	*ft_gnlstrdup(const char *s1);
 
 //    ***    Libft Part    **
 

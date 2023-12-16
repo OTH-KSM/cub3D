@@ -8,7 +8,8 @@ int main1(void)  {
         str[i] = '5';
         i++;
     }
-    char *line1 = ft_strtrim(str, "\t");
+    char *line1 = ft_strtrim(ft_strtrim(str, "\t"), " ");
+    free(str);
     free(line1);
     return (0);
 }
