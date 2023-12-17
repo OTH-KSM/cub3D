@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/16 19:28:37 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/17 12:24:56 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,12 @@ char    *_Fill(char *str, int maxlen)   {
     int j;
 
     new = ft_calloc(maxlen + 1, sizeof(char));
+    // printf("%s  %zu  %d\n", str, ft_strlen(str), maxlen);
     while (str[i] && str[i] != '\n')  {
+        if (!ft_strchr("NSWE10 ", str[i]))   {
+            write(2, "Error\nWrong Character in the Map\n", 33);
+            exit (1);
+        }
         new[i] = str[i];
         i++;
     }
@@ -51,24 +56,27 @@ char    *_Fill(char *str, int maxlen)   {
     return (new);
 }
 
-void    _CheckMap(char *argv, int maxlen, int lines, int last)  {
-    int fd = open(argv, O_RDONLY);
+void    _CheckMap(int fd, int maxlen, int lines, int last)  {
     int i = 0;
-    int j = 0;
     char *str;
     char **map;
-    
+    // if no line in the part of the map so print an error
+    if (!maxlen)    {
+        write(2, "Error\nEmty map\n", 15);
+        exit (1);
+    }
     map = ft_calloc(lines - last + 1, sizeof(char *));
-    while (i <= lines)    {
-        str = get_next_line(fd);
-        if (i > last)   {
-            map[j] = _Fill(str, maxlen);
-            j++;
-        }
+    str = get_next_line(fd);
+    while (str)    {
+        // printf("1: %s", str);
+        map[i] = _Fill(str, maxlen);
+        // printf("%d\n", i);
         free(str);
+        str = get_next_line(fd);
         i++;
     }
-    for (int k = 0; k < lines - last; k++)  {
+    printf("printing map\n");
+    for (int k = 0; map[k]; k++)  {
         printf("%s", map[k]);
     }
     exit (0);
@@ -77,18 +85,21 @@ void    _CheckMap(char *argv, int maxlen, int lines, int last)  {
 }
 
 int _ValidateFileContent(char *argv)	{
-    int maxlen = _ReturnStatistics(argv)[0];
-    int lines = _ReturnStatistics(argv)[1];
-    int last = _ReturnStatistics(argv)[2];
-    printf("maxlen: %d\nlines: %d\nlast: %d\n",maxlen, lines, last);
+    // array instead of three variable when each one calls the _ReturnStatistics
+    int *counted = _ReturnStatistics(argv); // [maxlen, lines, last]
+    int fd = open(argv, O_RDONLY);
+    // int maxlen = [0];
+    // int lines = _ReturnStatistics(argv)[1];
+    // int last = _ReturnStatistics(argv)[2];
+    printf("maxlen: %d\nlines: %d\nlast: %d\n",counted[0], counted[1], counted[2]);
     // exit (0);
-    if (lines == 0)	{
+    if (counted[1] == 0)	{
         write(2, "Error: File Empty\n", 18);
         exit (1);
     }
-    t_elist *head = _CheckEelements(argv, last);
-    _CheckMap(argv, maxlen, lines, last);
     printf("Finishing Filling\n");
+    t_elist *head = _CheckEelements(fd, counted[2]);
+    _CheckMap(fd, counted[0], counted[1], counted[2]);
     exit(0);
     while (head)	{
         printf("---------------------------------------------\n");
@@ -96,7 +107,7 @@ int _ValidateFileContent(char *argv)	{
         printf("%d\n", head->found);
         head = head->next_elem;
     }
-
+    close (fd);
     return (0);
 }
 
@@ -116,18 +127,28 @@ int*	_ReturnStatistics(char *argv)	{
     token = 0;
     while (1)	{
         tmp = get_next_line(fd);
-        if (!jeton && ft_strchr("10", ft_strtrim(tmp, " ")[0])) {
-            jeton = 1;
-            token = 1;
-            stats[2] = stats[1];
+        // a SEGV when entring strchr or strtrim when the EOF accure
+        if (tmp)    {
+            if (!jeton && ft_strchr("10", ft_strtrim(tmp, " ")[0])) {
+                // printf("%s\n", tmp);
+                jeton = 1;
+                token = 1;
+                stats[2] = stats[1];
+            }
+            if (token)  {
+                if (stats[0] < (len = ft_strlen(tmp)))
+                    stats[0] = len;
+            }
+            if (len == 0)
+                break ;
+            stats[1]++;
         }
-        if (token)  {
-            if (stats[0] < (len = ft_strlen(tmp)))
-                stats[0] = len; 
-        }
-        if (len == 0)
+        // this check if the map is emty so i should count the last line;
+        else    {
+            if (jeton == 0)
+                stats[2] = stats[1];
             break ;
-        stats[1]++;
+        }
     }
     // exit (0);
     close(fd);
@@ -198,8 +219,7 @@ bool	_ItMatchCol(t_elist *elem, char *sample, char **solutions, int token)	{
     // i shoudl free the solution because it comes allocated with split
 }
 
-t_elist	*_CheckEelements(char *argv, int last)	{
-    int fd = open(argv, O_RDONLY);
+t_elist	*_CheckEelements(int fd, int last)	{
     int i = 0;
     t_elist *head;
     t_elist *elem = _InializeLinkedList();
@@ -266,6 +286,7 @@ t_elist	*_CheckEelements(char *argv, int last)	{
     }
     elem = head;
     while (elem)	{
+        printf("%s : %d\n", elem->Key, elem->found);
         if (elem->found != 1)	{
             write(1, "Error\nMissing Elements or Elements Repetition\n", 46); // i should free someting before exiting
             exit (1);
