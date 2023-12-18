@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/17 12:24:56 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/18 22:54:11 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char    *_Fill(char *str, int maxlen)   {
     int j;
 
     new = ft_calloc(maxlen + 1, sizeof(char));
-    // printf("%s  %zu  %d\n", str, ft_strlen(str), maxlen);
     while (str[i] && str[i] != '\n')  {
         if (!ft_strchr("NSWE10 ", str[i]))   {
             write(2, "Error\nWrong Character in the Map\n", 33);
@@ -56,7 +55,7 @@ char    *_Fill(char *str, int maxlen)   {
     return (new);
 }
 
-void    _CheckMap(int fd, int maxlen, int lines, int last)  {
+char    **_CheckMap(int fd, int maxlen, int lines, int last)  {
     int i = 0;
     char *str;
     char **map;
@@ -68,38 +67,103 @@ void    _CheckMap(int fd, int maxlen, int lines, int last)  {
     map = ft_calloc(lines - last + 1, sizeof(char *));
     str = get_next_line(fd);
     while (str)    {
-        // printf("1: %s", str);
         map[i] = _Fill(str, maxlen);
-        // printf("%d\n", i);
         free(str);
         str = get_next_line(fd);
         i++;
     }
-    printf("printing map\n");
-    for (int k = 0; map[k]; k++)  {
-        printf("%s", map[k]);
-    }
-    exit (0);
-    printf("%d\n", maxlen);
     close(fd);
+    return (map);
+}
+
+int    _ParsFirstLine(char **map)  {
+    int i = 0;
+    while (map[0][i] && map[0][i] != '\n')   {
+        if (map[0][i] != '1' && map[0][i] != ' ' && map[0][i] != '*') {
+            return (-1);
+        }
+        else if (map[0][i] == ' ')
+        {
+            if (map[1][i] != ' ' && map[1][i] != '1')   {
+                return (-1);
+            }
+        }
+        else if (map[0][i] == '*')  {
+            if (map[1][i] != ' ' && map[1][i] != '1' && map[1][i] != '*')   {
+                return (-1);
+            }
+        }
+        i++;
+    }
+    return (0);
+}
+
+int    _ParsLastLine(char **map,int mapL)  {
+    int i = 0;
+    mapL -= 1;
+    while (map[mapL][i] && map[mapL][i] != '\n')   {
+        if (map[mapL][i] != '1' && map[mapL][i] != ' ' && map[mapL][i] != '*') {
+            return (-1);
+        }
+        else if (map[mapL][i] == ' ')
+        {
+            if (map[mapL - 1][i] != ' ' && map[mapL - 1][i] != '1')   {
+                return (-1);
+            }
+        }
+        else if (map[mapL][i] == '*')  {
+            if (map[mapL - 1][i] != ' ' && map[mapL - 1][i] != '1' && map[mapL - 1][i] != '*')   {
+                return (-1);
+            }
+        }
+        i++;
+    }
+    return (0);
+    // Note that this logic accept an emty last line means that the last line can be all just '*'
+}
+
+
+void    _ItterateTheMap(char **map, int mapL) {
+    int i = 0;
+    int j;
+    int count = 0;
+    while (map[i])  {
+        j = 0;
+        while (map[i][j])   {
+            if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
+                count++;
+            j++;
+        }
+        i++;
+    }
+    if (count != 1) {
+        write(2, "Error\nMultiplayers in the map\n", 30);
+        exit (1);
+    }
+    if(_ParsFirstLine(map)|| _ParsLastLine(map, mapL)) {
+        write(2, "Error\nMa Map Ma Walo\n", 21);
+        exit (1);
+    }
 }
 
 int _ValidateFileContent(char *argv)	{
     // array instead of three variable when each one calls the _ReturnStatistics
     int *counted = _ReturnStatistics(argv); // [maxlen, lines, last]
     int fd = open(argv, O_RDONLY);
-    // int maxlen = [0];
-    // int lines = _ReturnStatistics(argv)[1];
-    // int last = _ReturnStatistics(argv)[2];
-    printf("maxlen: %d\nlines: %d\nlast: %d\n",counted[0], counted[1], counted[2]);
-    // exit (0);
+    // printf("maxlen: %d\nlines: %d\nlast: %d\n",counted[0], counted[1], counted[2]);
     if (counted[1] == 0)	{
         write(2, "Error: File Empty\n", 18);
         exit (1);
     }
-    printf("Finishing Filling\n");
     t_elist *head = _CheckEelements(fd, counted[2]);
-    _CheckMap(fd, counted[0], counted[1], counted[2]);
+    char    **map = _CheckMap(fd, counted[0], counted[1], counted[2]);
+    /*Printing the map*/
+        printf("printing map\n");
+        for (int k = 0; map[k]; k++)  {
+            printf("%s", map[k]);
+        }
+        printf("\n"); // this is for the last line that doesn't contain newline
+    _ItterateTheMap(map, counted[1] - counted[2]);
     exit(0);
     while (head)	{
         printf("---------------------------------------------\n");
@@ -286,7 +350,7 @@ t_elist	*_CheckEelements(int fd, int last)	{
     }
     elem = head;
     while (elem)	{
-        printf("%s : %d\n", elem->Key, elem->found);
+        // printf("%s : %d\n", elem->Key, elem->found);
         if (elem->found != 1)	{
             write(1, "Error\nMissing Elements or Elements Repetition\n", 46); // i should free someting before exiting
             exit (1);
