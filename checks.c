@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/20 13:56:15 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:15:22 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char    **_CheckMap(int fd, int maxlen, int lines, int last)  {
 
 int    _ParsFirstLine(char **map, int mapL)  {
 	int i = 0;
-	printf("First\n");
+	// printf("First\n");
 	while (map[0][i] && map[0][i] != '*')   {
 		if (map[0][i] != '1' && map[0][i] != ' ') {
 			return (-1);
@@ -102,7 +102,7 @@ int    _ParsFirstLine(char **map, int mapL)  {
 int    _ParsLastLine(char **map,int mapL)  {
 	int i = 0;
 	mapL -= 1;
-	printf("Last\n");
+	// printf("Last\n");
 	while (map[mapL][i] && map[mapL][i] != '*')   {
 		if (map[mapL][i] != '1' && map[mapL][i] != ' ') {
 			return (-1);
@@ -122,7 +122,7 @@ int    _ParsLastLine(char **map,int mapL)  {
 int		_ParsMiddle(char **map, int mapL) {
 	int i = 0;
 	int j = 0;
-	printf("Middle\n");
+	// printf("Middle\n");
 	if (mapL <= 2)
 		return (-1);
 	while (i < mapL - 1)	{
@@ -174,7 +174,7 @@ void    _ItterateTheMap(char **map, int mapL) {
 	}
 }
 
-int _ValidateFileContent(char *argv)	{
+t_final	_ValidateFileContent(char *argv)	{
 	// array instead of three variable when each one calls the _ReturnStatistics
 	int *counted = _ReturnStatistics(argv); // [maxlen, lines, last]
 	int fd = open(argv, O_RDONLY);
@@ -185,25 +185,24 @@ int _ValidateFileContent(char *argv)	{
 		exit (1);
 	}
 	t_elist *head = _CheckEelements(fd, counted[2]);
-	char    **map = _CheckMap(fd, counted[0], counted[1], counted[2]);
+	char **map = _CheckMap(fd, counted[0], counted[1], counted[2]);
 	/*Printing the map*/
-		printf("printing map\n");
-		for (int k = 0; map[k]; k++)  {
-		    printf("%s\n", map[k]);
-		}
-		// exit (0);
-		// printf("\n"); // this is for the last line that doesn't contain newline
+	// printf("printing map\n");
+	// for (int k = 0; map[k]; k++)  {
+	// 	printf("%s\n", map[k]);
+	// }
 	_ItterateTheMap(map, counted[1] - counted[2]);
-	exit(0);
-	while (head)	{
-		printf("---------------------------------------------\n");
-		printf("%s\n%s\n%s\n%s\n", head->Key, head->Value1, head->Value2, head->Value3);
-		printf("%d\n", head->found);
-		head = head->next_elem;
-	}
+	t_final data;
+	data = _PassingTheData(head, map, counted[1]);
 	close (fd);
-	return (0);
+	return (data);
 }
+	// while (head)	{
+	// 	printf("---------------------------------------------\n");
+	// 	printf("%s\n%s\n%s\n%s\n", head->Key, head->Value1, head->Value2, head->Value3);
+	// 	printf("%d\n", head->found);
+	// 	head = head->next_elem;
+	// }
 
 int*	_ReturnStatistics(char *argv)	{
 	int *stats;
