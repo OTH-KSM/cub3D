@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/20 16:46:08 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/20 19:23:34 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ t_elist	*_CheckEelements(int fd, int last)	{
 		if (line && line[0] != '\n')
 		{
 			len = ft_strlen(line);
-			// ISSUE #2
-			// ISSUE #3
-			// ISSUE #4
 			if (line[len - 1] == '\n')	{ // i should free the first "line"
 				line = ft_substr(line, 0, len - 1);
 			}
@@ -46,7 +43,15 @@ t_elist	*_CheckEelements(int fd, int last)	{
 					elem->Genre = 0;
 				}
 				else if (_ItMatchCol(elem, line, ft_split("C -F ", '-'), 1))	{
-					splited = ft_split(ft_strtrim(line + 1, " "), ',');
+					// check if there is a comma at the beginning or at the end of the values of type of elements
+					/*this trim that is here removes the spaces after the last comma ex : "    F    ,0,255,255, "
+					so because of that when i ckeck the splited i don't find that last aray*/
+					// try to apply trim that removes just the first elements
+					splited = ft_split(ft_strtrim(line, " ") + 1, ',');
+					for (int k = 0; splited[k]; k++)	{
+						printf("1: %s\n", splited[k]);
+					}
+					exit (0);
 					elem->Key = ft_substr(line, 0, 1);
 					if (splited[0])	{
 						elem->Value1 = ft_strtrim(splited[0], " ");
@@ -55,6 +60,7 @@ t_elist	*_CheckEelements(int fd, int last)	{
 							if (splited[2])	{
 								elem->Value3 = ft_strtrim(splited[2], " ");
 								if (splited[3])	{
+									
 									write(2, "Error\nToo Many Colors Arguments\n", 33);
 									exit (0);
 								}
@@ -126,6 +132,7 @@ bool	_ItMatchDir(t_elist *elem, char *sample, char **solutions, int token)	{
 
 bool	_ItMatchCol(t_elist *elem, char *sample, char **solutions, int token)	{
 	static int count[2]; // [F, C]
+	// the space before type of elements is not good -> DONE
 	char	*tmp = ft_strtrim(sample, " ");
 	if (!ft_strncmp(tmp, solutions[0], 2) || !ft_strncmp(tmp, solutions[1], 2))
 	{
@@ -183,6 +190,9 @@ int	_CheckColValues(t_elist *elem)	{
 	}
 	else {
 		if (_isDigit(elem->Value1) || _isDigit(elem->Value2) || _isDigit(elem->Value3))	{
+			if (elem->Value1)	{printf("1: %s\n", elem->Value1);}
+			if (elem->Value2)	{printf("2: %s\n", elem->Value2);}
+			if (elem->Value3)	{printf("3: %s\n", elem->Value3);}
 			write(2, "Error\nColors elements's Values are not digits\n", 46);
 			return (-1);
 		}
@@ -196,4 +206,3 @@ int	_CheckColValues(t_elist *elem)	{
 	}
 	return (0);
 }
-
