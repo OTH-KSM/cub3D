@@ -1,5 +1,5 @@
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
-SRC = checks.c main.c PassData.c
+CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+SRC = main.c Validation.c Phase01.c Phase02.c Phase03.c PassData.c
 OBJ = $(SRC:.c=.o)
 LIBFT = libft/libft.a
 OLIBFT = libft/*.c

@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:11 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/20 15:17:34 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/20 16:39:07 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ int main(int argc, char *argv[])  {
         printf("%s\n", data.map[i]);
         i++;
     }
-	exit (0);
+    return (0);
 }
