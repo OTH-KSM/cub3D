@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/20 16:24:39 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/20 16:46:08 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,42 +98,50 @@ t_elist	*_CheckEelements(int fd, int last)	{
 }
 
 bool	_ItMatchDir(t_elist *elem, char *sample, char **solutions, int token)	{
-	// printf("1: \"%s\"\n%s\n%s\n%s\n%s\n", sample, solutions[0], solutions[1], solutions[2], solutions[3]);
+	// printf("1: \"%s\"\n%s\n%s\n%s\n%s\n", tmp, solutions[0], solutions[1], solutions[2], solutions[3]);
 	static int count[4]; // [NO, SO, WE, EA]
-	if (!ft_strncmp(sample, solutions[0], 3) || !ft_strncmp(sample, solutions[1], 3)
-	|| !ft_strncmp(sample, solutions[2], 3) || !ft_strncmp(sample, solutions[3], 3))
+	char	*tmp = ft_strtrim(sample, " ");
+	if (!ft_strncmp(tmp, solutions[0], 3) || !ft_strncmp(tmp, solutions[1], 3)
+	|| !ft_strncmp(tmp, solutions[2], 3) || !ft_strncmp(tmp, solutions[3], 3))
 	{
 		if (token == 1)	{
-			if (!ft_strncmp(sample, solutions[0], 3))
+			if (!ft_strncmp(tmp, solutions[0], 3))
 				elem->found = ++(count[0]);
-			else if (!ft_strncmp(sample, solutions[1], 3))
+			else if (!ft_strncmp(tmp, solutions[1], 3))
 				elem->found = ++(count[1]);
-			else if  (!ft_strncmp(sample, solutions[2], 3))
+			else if  (!ft_strncmp(tmp, solutions[2], 3))
 				elem->found = ++(count[2]);
-			else if  (!ft_strncmp(sample, solutions[3], 3))
+			else if  (!ft_strncmp(tmp, solutions[3], 3))
 				elem->found = ++(count[3]);
 		}
+		free(tmp);
 		return (true);
 	}
-	else
+	else	{
+		free(tmp);
 		return (false);
+	}
 	// i shoudl free the solution because it comes allocated with split
 }
 
 bool	_ItMatchCol(t_elist *elem, char *sample, char **solutions, int token)	{
 	static int count[2]; // [F, C]
-	if (!ft_strncmp(sample, solutions[0], 2) || !ft_strncmp(sample, solutions[1], 2))
+	char	*tmp = ft_strtrim(sample, " ");
+	if (!ft_strncmp(tmp, solutions[0], 2) || !ft_strncmp(tmp, solutions[1], 2))
 	{
 		if (token == 1) {
-			if (!ft_strncmp(sample, solutions[0], 2))
+			if (!ft_strncmp(tmp, solutions[0], 2))
 				elem->found = ++(count[0]);
-			else if (!ft_strncmp(sample, solutions[1], 2))
+			else if (!ft_strncmp(tmp, solutions[1], 2))
 				elem->found = ++(count[1]);
 		}
+		free(tmp);
 		return (true);
 	}
-	else
+	else	{
+		free(tmp);
 		return (false);
+	}
 	// i shoudl free the solution because it comes allocated with split
 }
 
