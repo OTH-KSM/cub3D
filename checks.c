@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/20 12:20:22 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/20 13:56:15 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int    _ParsLastLine(char **map,int mapL)  {
 }
 
 int		_ParsMiddle(char **map, int mapL) {
-	int i = 1;
+	int i = 0;
 	int j = 0;
 	printf("Middle\n");
 	if (mapL <= 2)
@@ -128,15 +128,16 @@ int		_ParsMiddle(char **map, int mapL) {
 	while (i < mapL - 1)	{
 		j = 0;
 		while (map[i][j] && map[i][j] != '*')	{
-			// printf("%c.", map[i][j]);
 			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')	{
-				if (map[i - 1][j] == ' ')
-					return (-1);
-				if (map[i + 1][j] == ' ')
+				if (j == 0)
 					return (-1);
 				if (j > 0 && map[i][j - 1] == ' ')
 					return (-1);
-				if (map[i][j + 1] && map[i][j + 1] == ' ')
+				if (map[i][j + 1] && (map[i][j + 1] == ' ' || map[i][j + 1] == '*'))
+					return (-1);
+				if (map[i - 1][j] == ' ')
+					return (-1);
+				if (map[i + 1][j] == ' ')
 					return (-1);
 			}	
 			j++;
@@ -154,7 +155,7 @@ void    _ItterateTheMap(char **map, int mapL) {
 		j = 0;
 		if (ft_strchr(map[i], '+'))	{
 			write(2, "Error\nma map ma walo\n", 21);
-			exit (0);
+			exit (1);
 		}
 		while (map[i][j])   {
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
