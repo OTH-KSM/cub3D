@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/19 13:06:14 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:20:22 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,16 @@ char    *_Fill(char *str, int maxlen)   {
 	}
 	j = i;
 	while (i < maxlen - 1) {
-		new[i] = '*';
+		new[i] = ' ';
 		i++;
 	}
 	// ISSUE #9
-	if (str[j] == '\n')
-		new[i] = '\n';
+	if (str[j] == '\n')	{
+		if (j == 0)
+			new[i] = '+';
+		else
+			new[i] = '*';	
+	}
 	return (new);
 }
 
@@ -80,18 +84,13 @@ char    **_CheckMap(int fd, int maxlen, int lines, int last)  {
 int    _ParsFirstLine(char **map, int mapL)  {
 	int i = 0;
 	printf("First\n");
-	while (map[0][i] && map[0][i] != '\n')   {
-		if (map[0][i] != '1' && map[0][i] != ' ' && map[0][i] != '*') {
+	while (map[0][i] && map[0][i] != '*')   {
+		if (map[0][i] != '1' && map[0][i] != ' ') {
 			return (-1);
 		}
 		else if (map[0][i] == ' ')
 		{
 			if (mapL > 1 && map[1][i] != ' ' && map[1][i] != '1')   {
-				return (-1);
-			}
-		}
-		else if (map[0][i] == '*')  {
-			if (mapL > 1 && map[1][i] != ' ' && map[1][i] != '1' && map[1][i] != '*')   {
 				return (-1);
 			}
 		}
@@ -104,18 +103,13 @@ int    _ParsLastLine(char **map,int mapL)  {
 	int i = 0;
 	mapL -= 1;
 	printf("Last\n");
-	while (map[mapL][i] && map[mapL][i] != '\n')   {
-		if (map[mapL][i] != '1' && map[mapL][i] != ' ' && map[mapL][i] != '*') {
+	while (map[mapL][i] && map[mapL][i] != '*')   {
+		if (map[mapL][i] != '1' && map[mapL][i] != ' ') {
 			return (-1);
 		}
 		else if (map[mapL][i] == ' ')
 		{
 			if (map[mapL - 1][i] != ' ' && map[mapL - 1][i] != '1')   {
-				return (-1);
-			}
-		}
-		else if (map[mapL][i] == '*')  {
-			if (map[mapL - 1][i] != ' ' && map[mapL - 1][i] != '1' && map[mapL - 1][i] != '*')   {
 				return (-1);
 			}
 		}
@@ -133,16 +127,16 @@ int		_ParsMiddle(char **map, int mapL) {
 		return (-1);
 	while (i < mapL - 1)	{
 		j = 0;
-		while (map[i][j] && map[i][j] != '\n')	{
+		while (map[i][j] && map[i][j] != '*')	{
 			// printf("%c.", map[i][j]);
 			if (map[i][j] == '0' || map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')	{
-				if (map[i - 1][j] == ' ' || map[i][j] == '*')
+				if (map[i - 1][j] == ' ')
 					return (-1);
-				if (map[i + 1][j] == ' ' || map[i][j] == '*')
+				if (map[i + 1][j] == ' ')
 					return (-1);
-				if (j > 0 && (map[i][j - 1] == ' ' || map[i][j + 1] == '*'))
+				if (j > 0 && map[i][j - 1] == ' ')
 					return (-1);
-				if (map[i][j + 1] && (map[i][j + 1] == ' ' || map[i][j + 1] == '*'))
+				if (map[i][j + 1] && map[i][j + 1] == ' ')
 					return (-1);
 			}	
 			j++;
@@ -158,6 +152,10 @@ void    _ItterateTheMap(char **map, int mapL) {
 	int count = 0;
 	while (map[i])  {
 		j = 0;
+		if (ft_strchr(map[i], '+'))	{
+			write(2, "Error\nma map ma walo\n", 21);
+			exit (0);
+		}
 		while (map[i][j])   {
 			if (map[i][j] == 'N' || map[i][j] == 'S' || map[i][j] == 'W' || map[i][j] == 'E')
 				count++;
@@ -188,10 +186,11 @@ int _ValidateFileContent(char *argv)	{
 	t_elist *head = _CheckEelements(fd, counted[2]);
 	char    **map = _CheckMap(fd, counted[0], counted[1], counted[2]);
 	/*Printing the map*/
-		// printf("printing map\n");
-		// for (int k = 0; map[k]; k++)  {
-		//     printf("%s", map[k]);
-		// }
+		printf("printing map\n");
+		for (int k = 0; map[k]; k++)  {
+		    printf("%s\n", map[k]);
+		}
+		// exit (0);
 		// printf("\n"); // this is for the last line that doesn't contain newline
 	_ItterateTheMap(map, counted[1] - counted[2]);
 	exit(0);
