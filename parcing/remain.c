@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:11 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 13:11:22 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 15:41:04 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 // 	printf("%s\n", data.EA);
 // 	printf("%d\n", data.F);
 // 	printf("%d\n", data.C);
+//     printf("height : %d\n", data.height);
+//     printf("width : %d\n", data.width);
 // 	// printf("%s\n", data.map[0]);
 //     int i = 0;
 //     while (data.map[i])  {

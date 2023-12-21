@@ -1,4 +1,4 @@
-#include "../header.h"
+#include "header.h"
 
 char map[ROWS][COLUMNS] = {
     {'1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
@@ -10,10 +10,30 @@ char map[ROWS][COLUMNS] = {
     {'1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
 };
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
+    t_final data;
 	t_data	img;
-
+    if (_ValidateInputAndFile(argc, argv))
+        return (-1);
+    data = _ValidateFileContent(argv[1]);
+        // data is the struct :
+        /*
+            typedef struct	s_FinalElem	{
+            char	*NO;
+            char	*SO;
+            char	*WE;
+            char	*EA;
+            int		F;
+            int		C;
+            int     height;
+            int     width;
+            char	**map;
+            struct	s_FilanElem *next_elem;
+        }	t_final;
+        */
+        // You have accsess to the map 
+        // height and width are your infomation about the map that you wanted
 	img.mlx = mlx_init();
 	img.mlx_win = mlx_new_window(img.mlx, MAP_HEIGHT, MAP_WIDTH, "Hello world!");
 	img.img = mlx_new_image(img.mlx, MAP_HEIGHT, MAP_WIDTH);

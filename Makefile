@@ -1,7 +1,8 @@
 # CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
 PSRC = parcing/remain.c parcing/Validation.c parcing/Phase01.c parcing/Phase02.c parcing/Phase03.c parcing/PassData.c
-ESRC = exec/main.c exec/check_funct.c exec/dda.c exec/draw_func.c exec/init.c exec/key_handling.c exec/render.c
-OBJ = $(ESRC:.c=.o) $(PSRC:.c=.o)
+ESRC = exec/check_funct.c exec/dda.c exec/draw_func.c exec/init.c exec/key_handling.c exec/render.c
+GSRC = main.c #global variables
+OBJ = $(ESRC:.c=.o) $(PSRC:.c=.o) $(GSRC:.c=.o)
 LIBFT = libft/libft.a
 OLIBFT = libft/*.c
 NAME = cub3D

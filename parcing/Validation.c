@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 12:00:07 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 15:36:27 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_final	_ValidateFileContent(char *argv)	{
 	// }
 	_ItterateTheMap(map, counted[1] - counted[2]);
 	t_final data;
-	data = _PassingTheData(head, map, counted[1]);
+	data = _PassingTheData(head, map, counted[1] - counted[2]);
 	close (fd);
 	return (data);
 }

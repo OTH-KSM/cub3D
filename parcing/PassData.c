@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:24:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 11:59:53 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 15:38:33 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void    _FreeElem(t_elist *head)    {
 t_final _PassingTheData(t_elist *met, char **map, int lines)  {
     t_final data;
     t_elist *head;
+    char    *tmp;
     head = met;
     int     i = 0;
     while (met) {
@@ -63,10 +64,15 @@ t_final _PassingTheData(t_elist *met, char **map, int lines)  {
             data.C = _RGBtoInt(ft_atoi(met->Value1), ft_atoi(met->Value2), ft_atoi(met->Value3));
         met = met->next_elem;
     }
+    data.height = lines;
     /*pass the map*/
     data.map = ft_calloc(lines + 1, sizeof(char *));
     while (map[i])  {
-        data.map[i] = ft_strdup(ft_strtrim(map[i], "*"));
+        tmp = ft_strtrim(map[i], "*");
+        if (i == 0)
+            data.width = ft_strlen(tmp);
+        data.map[i] = ft_strdup(tmp);
+        free(tmp);
         i++;
     }
     _FreeElem(head);

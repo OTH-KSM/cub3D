@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 13:06:54 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 15:36:38 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ typedef struct	s_FinalElem	{
 	char	*EA;
 	int		F;
 	int		C;
+	int		width;
+	int		height;
 	char	**map;
 	struct	s_FilanElem *next_elem;
 }	t_final;
