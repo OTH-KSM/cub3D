@@ -1,6 +1,6 @@
 /* XPM */
 static char *_85318907bb64a2ad63256322b97e391lrXoVFjgyzTQhaOM[] = {
-/* columns rows colors chars-per-pixel */
+/* columns data->parse.height colors chars-per-pixel */
 "200 200 256 2 ",
 "   c #291B00",
 ".  c #311D00",

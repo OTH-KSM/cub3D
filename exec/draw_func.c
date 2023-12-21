@@ -45,11 +45,11 @@ void    draw_map(t_data *data)
     i = 0;
     j = 0;
     k = 0;
-    while(i <= ROWS)//
+    while(i < data->parse.height)//
     {
-        while(j <= COLUMNS)//
+        while(j < data->parse.width)//
         {
-            if(map[i][j] == '1')
+            if(data->parse.map[i][j] == '1')
                 draw_square(data, (i * TILE_SIZE) + k, (j * TILE_SIZE), 0xf45d52);
             else
                 draw_square(data, (i * TILE_SIZE) + k, (j * TILE_SIZE), 0xffffff);
@@ -59,6 +59,16 @@ void    draw_map(t_data *data)
         j = 0;
         i++;
     }
+    double x = data->player_x;
+    double y = data->player_y;
+    while (j < 100)
+        {
+                my_mlx_pixel_put(data, x, y, 0x000000);
+                // mlx_pixel_put(data->mlx, data->mlx_win, x, y, 0x000000);
+                x = x + cos(data->rotationAngle);
+                y = y + sin(data->rotationAngle);
+            j++;
+        }
 }
 
 // using the implementation of the pythagore theorem we know that
