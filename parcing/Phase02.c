@@ -6,11 +6,11 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:15:54 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 11:28:00 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:00:00 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../header.h"
 
 char    **_CheckMap(int fd, int maxlen, int lines, int last)  {
 	int i = 0;

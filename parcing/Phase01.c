@@ -6,11 +6,11 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 11:27:16 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 11:59:56 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../header.h"
 
 char *_removespaces(char *str)	{
 	int i = 0;

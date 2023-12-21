@@ -6,11 +6,11 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 11:28:31 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:00:07 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../header.h"
 
 int	_ValidateInputAndFile(int argc, char *argv[])	{
 	if (argc != 2) {

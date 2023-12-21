@@ -6,11 +6,11 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:17:05 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/20 16:18:31 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 12:00:03 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "header.h"
+#include "../header.h"
 
 void    _ItterateTheMap(char **map, int mapL) {
 	int i = 0;
