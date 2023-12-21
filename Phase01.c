@@ -6,11 +6,21 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/20 19:23:34 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 11:27:16 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
+
+char *_removespaces(char *str)	{
+	int i = 0;
+	while (str[i])	{
+		if (str[i] == 'C' || str[i] == 'F')
+			return (str + i);
+		i++;
+	}
+	return (NULL);
+}
 
 t_elist	*_CheckEelements(int fd, int last)	{
 	int i = 0;
@@ -42,16 +52,19 @@ t_elist	*_CheckEelements(int fd, int last)	{
 					}
 					elem->Genre = 0;
 				}
-				else if (_ItMatchCol(elem, line, ft_split("C -F ", '-'), 1))	{
-					// check if there is a comma at the beginning or at the end of the values of type of elements
+				else if (_ItMatchCol(elem, line, ft_split("C -F ", '-'), 1) )	{
+					// check if there is a comma at the beginning or at the end of the values of type of e lements
 					/*this trim that is here removes the spaces after the last comma ex : "    F    ,0,255,255, "
 					so because of that when i ckeck the splited i don't find that last aray*/
 					// try to apply trim that removes just the first elements
-					splited = ft_split(ft_strtrim(line, " ") + 1, ',');
-					for (int k = 0; splited[k]; k++)	{
-						printf("1: %s\n", splited[k]);
+					if (line[ft_strlen(line) - 1] == ',')	{						
+						write(2, "Error\nToo Many Colors Arguments\n", 33);
+						exit (1);
 					}
-					exit (0);
+					splited = ft_split((_removespaces(line) + 1), ',');
+					// for (int k = 0; splited[k]; k++)	{
+					// 	printf("1: %s\n", splited[k]);
+					// }
 					elem->Key = ft_substr(line, 0, 1);
 					if (splited[0])	{
 						elem->Value1 = ft_strtrim(splited[0], " ");
@@ -62,7 +75,7 @@ t_elist	*_CheckEelements(int fd, int last)	{
 								if (splited[3])	{
 									
 									write(2, "Error\nToo Many Colors Arguments\n", 33);
-									exit (0);
+									exit (1);
 								}
 							}
 						}
@@ -81,6 +94,7 @@ t_elist	*_CheckEelements(int fd, int last)	{
 				exit (1);
 			}
 		}
+		free(line);
 		i++;
 	}
 	elem = head;

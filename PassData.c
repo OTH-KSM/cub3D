@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   finalchecks.c                                      :+:      :+:    :+:   */
+/*   PassData.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:24:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/20 15:18:17 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 11:35:10 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,36 @@ int     _RGBtoInt(int R, int G, int B)  {
     return ((R << 16) | (G << 8) | B);
 }
 
+void    _FreeMap(char **str)    {
+    int i = 0;
+    while (str[i])  {
+        free(str[i]);
+        i++;
+    }
+    free(str);
+}
+
+void    _FreeElem(t_elist *head)    {
+    t_elist *tmp;
+    while (head)    {
+        if (head->Key)
+            free(head->Key);
+        if (head->Value1)
+            free(head->Value1);
+        if (head->Value2)
+            free(head->Value2);
+        if (head->Value3)
+            free(head->Value3);
+        tmp = head;
+        head = head->next_elem;
+        free(tmp);
+    }
+}
+
 t_final _PassingTheData(t_elist *met, char **map, int lines)  {
     t_final data;
+    t_elist *head;
+    head = met;
     int     i = 0;
     while (met) {
 		// printf("%s\n%s\n%s\n%s\n", met->Key, met->Value1, met->Value2, met->Value3);
@@ -41,5 +69,7 @@ t_final _PassingTheData(t_elist *met, char **map, int lines)  {
         data.map[i] = ft_strdup(ft_strtrim(map[i], "*"));
         i++;
     }
+    _FreeElem(head);
+    _FreeMap(map);
     return (data);
 }

@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:15:54 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/20 16:16:50 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 11:28:00 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,9 @@ char    **_CheckMap(int fd, int maxlen, int lines, int last)  {
 		exit (1);
 	}
 	map = ft_calloc(lines - last + 1, sizeof(char *));
-	str = get_next_line(fd);
-	while (str)    {
+	while ((str = get_next_line(fd)))    {
 		map[i] = _Fill(str, maxlen);
 		free(str);
-		str = get_next_line(fd);
 		i++;
 	}
 	close(fd);

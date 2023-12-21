@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:11 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/20 18:33:02 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 11:40:27 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ int main(int argc, char *argv[])  {
     //     printf("%s\n", data.map[i]);
     //     i++;
     // }
+    system("leaks cub3D | grep \"Process\"");
     return (0);
 }
