@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 16:48:12 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 18:50:50 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ t_elist	*_CheckEelements(int fd, int last)	{
 		{
 			len = ft_strlen(line);
 			if (line[len - 1] == '\n')	{ // i should free the first "line"
-				free(line);
+				char *tmp = line;
 				line = ft_substr(line, 0, len - 1);
+				free(tmp);
 			}
 			if (elem)	{
 				if (_ItMatchDir(elem, line, ft_split("NO -SO -WE -EA ", '-'), 1))	{ 

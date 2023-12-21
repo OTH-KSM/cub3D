@@ -1,4 +1,4 @@
-# CFLAGS = -Wall -Wextra -Werror #-fsanitize=address -g3
+CFLAGS = #-fsanitize=address -g3
 PSRC = parc/remain.c parc/Validation.c parc/Phase01.c parc/Phase02.c parc/Phase03.c parc/PassData.c
 ESRC = exec/check_funct.c exec/dda.c exec/draw_func.c exec/init.c exec/key_handling.c exec/render.c
 GSRC = main.c #global variables
