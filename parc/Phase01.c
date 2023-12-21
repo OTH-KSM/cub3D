@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 16:33:14 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:48:12 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_elist	*_CheckEelements(int fd, int last)	{
 				}
 				else	{
 					printf("|%s|\n", line);
-					write(2, "Error\nWrong Type of Element\n", 28);	
+					write(2, "Error\nWrong Type of Element\n", 28);
 					exit (1);
 				}
 				elem = elem->next_elem;
@@ -105,7 +105,8 @@ t_elist	*_CheckEelements(int fd, int last)	{
 	elem = head;
 	while (elem)	{
 		if (elem->found != 1)	{
-			write(1, "Error\nMissing Elements or Elements Repetition\n", 46); // i should free someting before exiting
+			write(1, "Error\nMissing Elements or Elements Repetition\n", 46);
+			
 			exit (1);
 		}
 		if (elem->Genre == 0)	{

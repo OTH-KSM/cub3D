@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:24:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 16:37:50 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:52:47 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,5 @@ t_final _PassingTheData(t_elist *met, char **map, int lines)  {
     }
     _FreeElem(head);
     free_2D_array(map);
-    free(met);
     return (data);
 }
