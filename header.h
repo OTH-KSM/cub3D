@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 16:11:28 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 19:01:51 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <math.h>
 # include <limits.h>
 
-#define MAP_HEIGHT 1920
-#define MAP_WIDTH 1080
+#define MAP_WIDTH 1920
+#define MAP_HEIGHT 1080
 #define TILE_SIZE 64
 #define ROWS 7
 #define COLUMNS 10
@@ -107,9 +107,10 @@ typedef struct	s_data {
     int check_test;
     int move;
     int turn;
+	t_final parse;
 }				t_data;
 
-int		is_wall(long x_touch, long y_touch);
+int		is_wall(t_data *data, long x_touch, long y_touch);
 int		check_ray(t_data *data, double x, double y);
 void	cast_all_rays(t_data *data, double x, double y);
 int		check_boundary(t_data *data, double add);

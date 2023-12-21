@@ -67,13 +67,13 @@ float     check_interception(t_data *data, double angle)
     if(is_up == 1)
         y_horiz_touch--;
     // printf("ray_angle %f x_step %f y_step %f x_horiz %f y_horiz %f\n", ray_angle, x_horiz_step, y_horiz_step, x_horiz_touch, y_horiz_touch);    
-    while(x_horiz_touch >= 0 && x_horiz_touch <= MAP_HEIGHT && y_horiz_touch >= 0 && y_horiz_touch <= MAP_WIDTH)
+    while(x_horiz_touch >= 0 && x_horiz_touch <= MAP_WIDTH && y_horiz_touch >= 0 && y_horiz_touch <= MAP_HEIGHT)
     {
         float x_to_check = x_horiz_touch;
         float y_to_check = y_horiz_touch;
         if(is_up == 1)
             y_to_check--;
-        if(is_wall(x_to_check, y_to_check) == 1)
+        if(is_wall(data, x_to_check, y_to_check) == 1)
         {
             // printf("%ld   %ld\n", x_horiz_touch, y_horiz_touch);
     
@@ -115,13 +115,13 @@ float     check_interception(t_data *data, double angle)
     if(is_left == 1)
         x_verti_touch--;
     // printf("ray_angle %f x_step %ld y_step %ld x_verti %ld y_verti_touch %ld\n", ray_angle, x_verti_step, y_verti_step, x_verti_touch, y_verti_touch);    
-    while(x_verti_touch >= 0 && x_verti_touch <= MAP_HEIGHT && y_verti_touch >= 0 && y_verti_touch <= MAP_WIDTH)
+    while(x_verti_touch >= 0 && x_verti_touch <= MAP_WIDTH && y_verti_touch >= 0 && y_verti_touch <= MAP_HEIGHT)
     {
         float x_to_check = x_verti_touch;
         float y_to_check = y_verti_touch;
         if(is_left == 1)
             x_to_check--;
-        if(is_wall(x_to_check, y_to_check))
+        if(is_wall(data, x_to_check, y_to_check))
         {
             // printf("%ld   %ld\n", x_verti_touch, y_verti_touch);
             found_verti_hit = 1;
