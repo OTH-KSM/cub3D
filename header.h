@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 15:36:38 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:11:28 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int			_ParsMiddle(char **map, int mapL);
 t_final		_PassingTheData(t_elist *met, char **map, int lines);
 int			_RGBtoInt(int R, int G, int B);
 
+
+void	free_2D_array(char **array);
 /****************************************************************************************************/
 
 extern char map[ROWS][COLUMNS];

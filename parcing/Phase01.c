@@ -6,11 +6,18 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 11:59:56 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:33:14 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
+
+void	free_2D_array(char **array) {
+    for(int i = 0; array[i]; i++) {
+        free(array[i]);
+    }
+    free(array);
+}
 
 char *_removespaces(char *str)	{
 	int i = 0;
@@ -36,27 +43,24 @@ t_elist	*_CheckEelements(int fd, int last)	{
 		{
 			len = ft_strlen(line);
 			if (line[len - 1] == '\n')	{ // i should free the first "line"
+				free(line);
 				line = ft_substr(line, 0, len - 1);
 			}
 			if (elem)	{
-				// TODO #8
 				if (_ItMatchDir(elem, line, ft_split("NO -SO -WE -EA ", '-'), 1))	{ 
 					splited = ft_split(line, ' ');
-					elem->Key = splited[0];
+					elem->Key = ft_strdup(splited[0]);
 					if (splited[1])	{
-						elem->Value1 = splited[1];
-						if (splited[2])	{
+						elem->Value1 = ft_strdup(splited[1]);
+						if (splited[2])	{ 
 							write(2, "Error\nToo many Directions Arguments\n", 36);
 							exit (1);
 						}
 					}
+					free_2D_array(splited);
 					elem->Genre = 0;
 				}
 				else if (_ItMatchCol(elem, line, ft_split("C -F ", '-'), 1) )	{
-					// check if there is a comma at the beginning or at the end of the values of type of e lements
-					/*this trim that is here removes the spaces after the last comma ex : "    F    ,0,255,255, "
-					so because of that when i ckeck the splited i don't find that last aray*/
-					// try to apply trim that removes just the first elements
 					if (line[ft_strlen(line) - 1] == ',')	{						
 						write(2, "Error\nToo Many Colors Arguments\n", 33);
 						exit (1);
@@ -80,6 +84,7 @@ t_elist	*_CheckEelements(int fd, int last)	{
 							}
 						}
 					}
+					free_2D_array(splited);
 					elem->Genre = 1;
 				}
 				else	{
@@ -99,7 +104,6 @@ t_elist	*_CheckEelements(int fd, int last)	{
 	}
 	elem = head;
 	while (elem)	{
-		// printf("%s : %d\n", elem->Key, elem->found);
 		if (elem->found != 1)	{
 			write(1, "Error\nMissing Elements or Elements Repetition\n", 46); // i should free someting before exiting
 			exit (1);
@@ -118,7 +122,6 @@ t_elist	*_CheckEelements(int fd, int last)	{
 }
 
 bool	_ItMatchDir(t_elist *elem, char *sample, char **solutions, int token)	{
-	// printf("1: \"%s\"\n%s\n%s\n%s\n%s\n", tmp, solutions[0], solutions[1], solutions[2], solutions[3]);
 	static int count[4]; // [NO, SO, WE, EA]
 	char	*tmp = ft_strtrim(sample, " ");
 	if (!ft_strncmp(tmp, solutions[0], 3) || !ft_strncmp(tmp, solutions[1], 3)
@@ -135,18 +138,18 @@ bool	_ItMatchDir(t_elist *elem, char *sample, char **solutions, int token)	{
 				elem->found = ++(count[3]);
 		}
 		free(tmp);
+		free_2D_array(solutions);
 		return (true);
 	}
 	else	{
 		free(tmp);
+		free_2D_array(solutions);
 		return (false);
 	}
-	// i shoudl free the solution because it comes allocated with split
 }
 
 bool	_ItMatchCol(t_elist *elem, char *sample, char **solutions, int token)	{
 	static int count[2]; // [F, C]
-	// the space before type of elements is not good -> DONE
 	char	*tmp = ft_strtrim(sample, " ");
 	if (!ft_strncmp(tmp, solutions[0], 2) || !ft_strncmp(tmp, solutions[1], 2))
 	{
@@ -157,13 +160,14 @@ bool	_ItMatchCol(t_elist *elem, char *sample, char **solutions, int token)	{
 				elem->found = ++(count[1]);
 		}
 		free(tmp);
+		free_2D_array(solutions);
 		return (true);
 	}
 	else	{
 		free(tmp);
+		free_2D_array(solutions);
 		return (false);
 	}
-	// i shoudl free the solution because it comes allocated with split
 }
 
 int	_CheckDirValues(t_elist *elem)	{

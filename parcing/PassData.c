@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:24:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 15:38:33 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:37:50 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,6 @@
 
 int     _RGBtoInt(int R, int G, int B)  {
     return ((R << 16) | (G << 8) | B);
-}
-
-void    _FreeMap(char **str)    {
-    int i = 0;
-    while (str[i])  {
-        free(str[i]);
-        i++;
-    }
-    free(str);
 }
 
 void    _FreeElem(t_elist *head)    {
@@ -76,6 +67,7 @@ t_final _PassingTheData(t_elist *met, char **map, int lines)  {
         i++;
     }
     _FreeElem(head);
-    _FreeMap(map);
+    free_2D_array(map);
+    free(met);
     return (data);
 }

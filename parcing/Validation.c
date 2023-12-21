@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 15:36:27 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/21 16:35:26 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_final	_ValidateFileContent(char *argv)	{
 	_ItterateTheMap(map, counted[1] - counted[2]);
 	t_final data;
 	data = _PassingTheData(head, map, counted[1] - counted[2]);
+	free(counted);
 	close (fd);
 	return (data);
 }
@@ -69,6 +70,7 @@ int*	_ReturnStatistics(char *argv)	{
 	int jeton;
 	int token;
 	char *tmp;
+	char *trimed;
 
 	fd = open(argv, O_RDONLY);
 	stats = malloc(3 * sizeof(int));
@@ -80,7 +82,8 @@ int*	_ReturnStatistics(char *argv)	{
 		tmp = get_next_line(fd);
 		// a SEGV when entring strchr or strtrim when the EOF accure
 		if (tmp)    {
-			if (!jeton && ft_strchr("10", ft_strtrim(tmp, " ")[0])) {
+			trimed = ft_strtrim(tmp, " ");
+			if (!jeton && ft_strchr("10", trimed[0])) {
 				// printf("%s\n", tmp);
 				jeton = 1;
 				token = 1;
@@ -90,6 +93,7 @@ int*	_ReturnStatistics(char *argv)	{
 				if (stats[0] < (len = ft_strlen(tmp)))
 					stats[0] = len;
 			}
+			free(trimed);
 			if (len == 0)
 				break ;
 			stats[1]++;
