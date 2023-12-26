@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 19:13:13 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/26 16:54:05 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,16 @@ typedef struct	s_FinalElem	{
 	char	**map;
 	struct	s_FilanElem *next_elem;
 }	t_final;
+
+typedef struct s_txt {
+	void 	*img;
+	char	 *addr;
+	int		bits_per_pixel;
+	int 	line_lenght;
+	int 	endian;
+	int  	width;
+	int 	height;
+}				t_txt;
 
 /*Validation*/
 int			_ValidateInputAndFile(int argc, char *argv[]);
@@ -105,10 +115,21 @@ typedef struct	s_data {
     float   turnSpeed;
     float    ray_distance;
     int check_test;
+	float hit_x;
+	float hit_y;
     int move;
     int turn;
+	t_txt	*NO;
+	t_txt	*SO;
+	t_txt	*EA;
+	t_txt	*WE;
 	t_final parse;
 }				t_data;
+
+
+unsigned int    bibo_mlx_pixel_put(t_data *data, int x, int y);
+t_txt	*new_img(t_data *data, char *path);
+
 
 int		is_wall(t_data *data, long x_touch, long y_touch);
 int		check_ray(t_data *data, double x, double y);

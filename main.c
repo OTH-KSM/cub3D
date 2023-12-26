@@ -39,6 +39,7 @@ int	main(int argc, char *argv[])
 	img.img = mlx_new_image(img.mlx, MAP_WIDTH, MAP_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
     img.turn = 0;
+    img.NO = new_img(&img, img.parse.NO);
     set_player(&img);
 	render_game(&img);
     // mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);

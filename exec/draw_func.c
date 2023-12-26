@@ -98,29 +98,90 @@ void draw_circle(t_data *data, int x, int y)
     }
 }
 
+t_txt	*new_img(t_data *data, char *path)
+{
+    t_txt	*txt;
+	txt = (t_txt *)malloc(sizeof(t_txt));
+	txt->img = mlx_xpm_file_to_image(data->mlx, path,
+			&txt->width, &txt->height);
+	if (!txt->img)
+		printf("invalid texture path");
+	txt->addr = mlx_get_data_addr(txt->img, &txt->bits_per_pixel,
+			&txt->line_lenght, &txt->endian);
+	return (txt);
+}
+
+unsigned int    bibo_mlx_pixel_put(t_data *data, int x, int y)
+{
+	char	*mlx_data_addr;
+	unsigned int	pos;
+
+	mlx_data_addr = data->NO->addr + y * data->NO->line_lenght + x * (data->NO->bits_per_pixel / 8);
+	return (*(unsigned int *)mlx_data_addr);
+}
+
+// --------------------------------------------------------------------------------------------------------------
+// {
+//     void	render_3d_map(t_data *d, t_draw *draw, int x)
+// {
+// 	int		i;
+// 	int		distance_center_wall;
+// 	int		correspanding_y_coordinate;
+// 	char	*dst;
+
+// 	i = 0;
+// 	while (i < draw->t_wall)
+// 		my_mlx_pixel_put(d->img, draw->x, i++, d->ceil);
+// 	while (i < draw->b_wall)
+// 	{
+// 		distance_center_wall = i + (draw->h_wall / 2) - (HMAP / 2);
+// 		correspanding_y_coordinate = (int)(distance_center_wall * (float)d->tex->height / draw->h_wall) % d->tex->height;
+// 		dst = d->tex->addr + correspanding_y_coordinate * d->tex->size_line + x * (d->tex->bits_per_pixel / 8);
+// 		my_mlx_pixel_put(d->img, draw->x, i, *(unsigned int *)dst);
+// 		i++;
+// 	}
+// 	while (i < HMAP)
+// 		my_mlx_pixel_put(d->img, draw->x, i++, d->floor);
+// }
+
+// }
+
+// --------------------------------------------------------------------------------------------------------------
+
 // obvious
 void    draw_rect(t_data *data, int x, int y, int height)
 {
     int i;
     int j;
+    unsigned int color;
+    int l;
+    int g;
 
     i = 0;
     j = 0;
-    if(data->check_test == 0)
-    {
+    int y1;
+    y1 = y;
+
+    // if(data->check_test == 0)
+    // {
+        // data->NO = new_img(data, data->parse.NO);
+        
+        int X = data->NO->height * fmod(data->hit_x + data->hit_y, 64) / 64;    
         while(j < height)
         {
-             my_mlx_pixel_put(data, x + i, y + j, 0x808080);
+            int Y = data->NO->width * ((y + j) - y1) / height;
+            color = bibo_mlx_pixel_put(data, X, Y);
+            my_mlx_pixel_put(data, x, y + j, color);
             j++;
         }
-    }
-    else
-    {
-        while(j < height)
-        {
-             my_mlx_pixel_put(data, x + i, y + j, 0x808fd80);
-            j++;
-        }
-    }
+    // }
+    // else
+    // {
+    //     while(j < height)
+    //     {
+    //          my_mlx_pixel_put(data, x + i, y + j, 0x808fd80);
+    //         j++;
+    //     }
+    // }
 
 }
