@@ -66,8 +66,8 @@ void    cast_all_rays(t_data *data, double x, double y) //not tested
         // printf("i gotta fix this %f %d %f\n\n\n", check_interception(data, angle), i, angle);
         real_distance = check_interception(data, angle) * cos(angle - data->rotationAngle);
         // printf("this is the real distance %f \n\n", real_distance);
-        draw_3d(data, real_distance, i);
         angle += FOV_ANGLE / MAP_WIDTH;
+        draw_3d(data, real_distance, i, angle);
         i++;
     }
     // printf("this is the angle u should check %d\n", an)

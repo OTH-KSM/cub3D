@@ -152,8 +152,9 @@ float     check_interception(t_data *data, double angle)
 
         // dont delete this you will need it for textures
 
-        // data->hit_v_x = wall_hit_x_verti;
-        // data->hit_v_y = wall_hit_y_verti;
+        data->hit_v_x = wall_hit_x_verti;
+        data->hit_v_y = wall_hit_y_verti;
+        data->check_test = 1;
         //was hit vertical;
         //wallhit  content
     }
@@ -162,9 +163,9 @@ float     check_interception(t_data *data, double angle)
         data->ray_distance = horz_hit_distance;
         // this too
         
-        data->hit_x = wall_hit_x_horiz;
-        data->hit_y = wall_hit_y_horiz;
-        data->check_test = 1;
+        data->hit_h_x = wall_hit_x_horiz;
+        data->hit_h_y = wall_hit_y_horiz;
+        data->check_test = 0;
     }
     // if(horz_hit_distance < verti_hit_distance)
     //     wall_hit_x = wall_hit_x_horiz;

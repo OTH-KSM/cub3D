@@ -101,11 +101,12 @@ void draw_circle(t_data *data, int x, int y)
 t_txt	*new_img(t_data *data, char *path)
 {
     t_txt	*txt;
-	txt = (t_txt *)malloc(sizeof(t_txt));
+	txt = malloc(sizeof(t_txt));
 	txt->img = mlx_xpm_file_to_image(data->mlx, path,
 			&txt->width, &txt->height);
-	if (!txt->img)
-		printf("invalid texture path");
+	if (!txt->img)  {
+		printf("invalid texture path\n");
+    }
 	txt->addr = mlx_get_data_addr(txt->img, &txt->bits_per_pixel,
 			&txt->line_lenght, &txt->endian);
 	return (txt);
@@ -149,39 +150,39 @@ unsigned int    bibo_mlx_pixel_put(t_data *data, int x, int y)
 // --------------------------------------------------------------------------------------------------------------
 
 // obvious
-void    draw_rect(t_data *data, int x, int y, int height)
-{
-    int i;
-    int j;
-    unsigned int color;
-    int l;
-    int g;
+// void    draw_rect(t_data *data, int x, int y, int height)
+// {
+//     int i;
+//     int j;
+//     unsigned int color;
+//     int l;
+//     int g;
 
-    i = 0;
-    j = 0;
-    int y1;
-    y1 = y;
+//     i = 0;
+//     j = 0;
+//     int y1;
+//     y1 = y;
 
-    // if(data->check_test == 0)
-    // {
-        // data->NO = new_img(data, data->parse.NO);
+//     // if(data->check_test == 0)
+//     // {
+//         // data->NO = new_img(data, data->parse.NO);
         
-        int X = data->NO->height * fmod(data->hit_x + data->hit_y, 64) / 64;    
-        while(j < height)
-        {
-            int Y = data->NO->width * ((y + j) - y1) / height;
-            color = bibo_mlx_pixel_put(data, X, Y);
-            my_mlx_pixel_put(data, x, y + j, color);
-            j++;
-        }
-    // }
-    // else
-    // {
-    //     while(j < height)
-    //     {
-    //          my_mlx_pixel_put(data, x + i, y + j, 0x808fd80);
-    //         j++;
-    //     }
-    // }
+//         int X = data->NO->height * fmod(data->hit_x + data->hit_y, 64) / 64;    
+//         while(j < height)
+//         {
+//             int Y = data->NO->width * ((y + j) - y1) / height;
+//             color = bibo_mlx_pixel_put(data, X, Y);
+//             my_mlx_pixel_put(data, x, y + j, color);
+//             j++;
+//         }
+//     // }
+//     // else
+//     // {
+//     //     while(j < height)
+//     //     {
+//     //          my_mlx_pixel_put(data, x + i, y + j, 0x808fd80);
+//     //         j++;
+//     //     }
+//     // }
 
-}
+// }

@@ -1,7 +1,7 @@
 #include "../header.h"
 
 // this function draws the walls in each pixel
-void    draw_3d(t_data *data, float distance, int x)
+void    draw_3d(t_data *data, float distance, int x, float angle)
 {
     float wall_height;
     float rayDistance;
@@ -20,15 +20,30 @@ void    draw_3d(t_data *data, float distance, int x)
     int i = 0;
     while (i < start)
         my_mlx_pixel_put(data, x, i++, 0x5247863);
-    floatz		distance_center_wall;
-    int X = (int)(data->hit_x * data->NO->width / TILE_SIZE) % data->NO->width;
+    float		distance_center_wall;
+    int X;
+    t_txt *txt = data->NO;
+    if (!data->check_test)  {
+		// if (angle >= _EA && angle < _WE) 
+		// 	txt = data->SO;
+		// else
+		// 	txt = data->NO;
+        X = (int)(data->hit_h_x * txt->width / TILE_SIZE) % txt->width;
+    }
+    else    {
+		// if (angle > _SO && angle <= _NO)
+		// 	txt = data->WE;
+		// else
+		// 	txt = data->EA;
+        X = (int)(data->hit_v_y * txt->width / TILE_SIZE) % txt->width;
+    }
     // int X = data->NO->height * fmod(data->hit_x + data->hit_y, TILE_SIZE) / TILE_SIZE;
     while (i < end) {
         
         // // int X = data->NO->height * fmod(data->hit_x + data->hit_y, 64) / 64; 
         distance_center_wall = i + (wall_height / 2) - (MAP_HEIGHT / 2);
 		// correspanding_y_coordinate = (int)(distance_center_wall * (float)d->tex->height / draw->h_wall) % d->tex->height;   
-        int Y = (int)(distance_center_wall * (float)data->NO->height / wall_height ) % data->NO->height;
+        int Y = (int)(distance_center_wall * (float)txt->height / wall_height ) % txt->height;
         color = bibo_mlx_pixel_put(data, X, Y);
         my_mlx_pixel_put(data, x, i, color);
         i++;
@@ -39,7 +54,24 @@ void    draw_3d(t_data *data, float distance, int x)
     while (i < MAP_HEIGHT) 
         my_mlx_pixel_put(data, x, i++, 0x1234567);
 }
-
+// {
+	// if (!d->rays[i].is_vert)
+	// {
+	// 	if (d->rays[i].angle >= EA && d->rays[i].angle < WE)
+	// 		d->tex = d->so;
+	// 	else
+	// 		d->tex = d->no;
+	// 	x = (int)(d->rays[i].x * d->tex->width / TILE_SIZE) % d->tex->width;
+	// }
+	// else
+	// {
+	// 	if (d->rays[i].angle > SO && d->rays[i].angle <= NO)
+	// 		d->tex = d->we;
+	// 	else
+	// 		d->tex = d->ea;
+	// 	x = (int)(d->rays[i].y * d->tex->width / TILE_SIZE) % d->tex->width;
+	// }
+// }
 // obvious
 void	render_background(t_data *data)
 {

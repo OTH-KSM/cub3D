@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/26 16:54:05 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/26 20:31:32 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 #define FOV_ANGLE (60 * (M_PI / 180))
 #define NUM_RAYS 1920
 #define WALL_WIDTH 100
+#define _NO 4.72
+#define _EA 0
+#define _SO 1.57
+#define _WE 3.14
 
 /****************************************************************************************************/
 typedef struct	s_elemlist	{
@@ -115,8 +119,10 @@ typedef struct	s_data {
     float   turnSpeed;
     float    ray_distance;
     int check_test;
-	float hit_x;
-	float hit_y;
+	float  hit_h_x;
+	float hit_h_y;
+	float hit_v_x;
+	float hit_v_y;
     int move;
     int turn;
 	t_txt	*NO;
@@ -146,7 +152,7 @@ void	set_player(t_data *data);
 double	set_angle(double angle);
 int		close_window(t_data *data);
 int		key_hook(int keycode, t_data *data);
-void	draw_3d(t_data *data, float distance, int x);
+void	draw_3d(t_data *data, float distance, int x, float angle);
 void	render_background(t_data *data);
 void	render_game(t_data *data);
 int		key_hook1(t_data *data);
