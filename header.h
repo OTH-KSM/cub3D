@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/26 20:31:32 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/27 12:17:31 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct	s_data {
 	t_txt	*SO;
 	t_txt	*EA;
 	t_txt	*WE;
+	t_txt	*tmp;
 	t_final parse;
 }				t_data;
 

@@ -44,9 +44,10 @@ int	main(int argc, char *argv[])
     printf("%s\n", img.parse.EA);
     printf("%s\n", img.parse.WE);
     img.NO = new_img(&img, img.parse.NO);
-    // img.SO = new_img(&img, img.parse.SO);
-    // img.EA = new_img(&img, img.parse.EA);
-    // img.WE = new_img(&img, img.parse.WE);
+    img.SO = new_img(&img, img.parse.SO);
+    img.EA = new_img(&img, img.parse.EA);
+    img.WE = new_img(&img, img.parse.WE);
+    // exit (0);
     set_player(&img);
 	render_game(&img);
     // mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);

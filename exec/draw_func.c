@@ -100,15 +100,24 @@ void draw_circle(t_data *data, int x, int y)
 
 t_txt	*new_img(t_data *data, char *path)
 {
+    static int i;
     t_txt	*txt;
-	txt = malloc(sizeof(t_txt));
+	txt = (t_txt *) malloc(sizeof(t_txt));
+    if (!txt)
+        exit (0);
 	txt->img = mlx_xpm_file_to_image(data->mlx, path,
 			&txt->width, &txt->height);
 	if (!txt->img)  {
-		printf("invalid texture path\n");
+		printf("invalid img\n");
+        exit (0);
     }
 	txt->addr = mlx_get_data_addr(txt->img, &txt->bits_per_pixel,
 			&txt->line_lenght, &txt->endian);
+	if (!txt->addr)  {
+		printf("invalid address path\n");
+        exit (0);
+    }
+    i++;
 	return (txt);
 }
 
@@ -117,7 +126,7 @@ unsigned int    bibo_mlx_pixel_put(t_data *data, int x, int y)
 	char	*mlx_data_addr;
 	unsigned int	pos;
 
-	mlx_data_addr = data->NO->addr + y * data->NO->line_lenght + x * (data->NO->bits_per_pixel / 8);
+	mlx_data_addr = data->tmp->addr + y * data->tmp->line_lenght + x * (data->tmp->bits_per_pixel / 8);
 	return (*(unsigned int *)mlx_data_addr);
 }
 

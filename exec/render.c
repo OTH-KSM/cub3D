@@ -22,20 +22,19 @@ void    draw_3d(t_data *data, float distance, int x, float angle)
         my_mlx_pixel_put(data, x, i++, 0x5247863);
     float		distance_center_wall;
     int X;
-    t_txt *txt = data->NO;
     if (!data->check_test)  {
-		// if (angle >= _EA && angle < _WE) 
-		// 	txt = data->SO;
-		// else
-		// 	txt = data->NO;
-        X = (int)(data->hit_h_x * txt->width / TILE_SIZE) % txt->width;
+		if (angle >= _EA && angle < _WE) 
+			data->tmp = data->SO;
+		else
+			data->tmp = data->NO;
+        X = (int)(data->hit_h_x * data->tmp->width / TILE_SIZE) % data->tmp->width;
     }
     else    {
-		// if (angle > _SO && angle <= _NO)
-		// 	txt = data->WE;
-		// else
-		// 	txt = data->EA;
-        X = (int)(data->hit_v_y * txt->width / TILE_SIZE) % txt->width;
+		if (angle > _SO && angle <= _NO)
+			data->tmp = data->WE;
+		else
+			data->tmp = data->EA;
+        X = (int)(data->hit_v_y * data->tmp->width / TILE_SIZE) % data->tmp->width;
     }
     // int X = data->NO->height * fmod(data->hit_x + data->hit_y, TILE_SIZE) / TILE_SIZE;
     while (i < end) {
@@ -43,7 +42,7 @@ void    draw_3d(t_data *data, float distance, int x, float angle)
         // // int X = data->NO->height * fmod(data->hit_x + data->hit_y, 64) / 64; 
         distance_center_wall = i + (wall_height / 2) - (MAP_HEIGHT / 2);
 		// correspanding_y_coordinate = (int)(distance_center_wall * (float)d->tex->height / draw->h_wall) % d->tex->height;   
-        int Y = (int)(distance_center_wall * (float)txt->height / wall_height ) % txt->height;
+        int Y = (int)(distance_center_wall * (float)data->tmp->height / wall_height ) % data->tmp->height;
         color = bibo_mlx_pixel_put(data, X, Y);
         my_mlx_pixel_put(data, x, i, color);
         i++;
@@ -93,7 +92,7 @@ void	render_background(t_data *data)
 // obvious
 void    render_game(t_data *data)
 {
-   render_background(data);
+//    render_background(data);
 //    draw_circle(data, data->player_x, data->player_y);
     // check_interception(data, data->rotationAngle);
     cast_all_rays(data, data->player_x, data->player_y);
