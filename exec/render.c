@@ -100,6 +100,5 @@ void    render_game(t_data *data)
     // draw_map(data);
     // cast_rays(data, data->player_x, data->player_y);
     mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
-
     // draw_triangle(data, x, y);
 }

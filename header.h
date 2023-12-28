@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: omarchic <omarchic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/27 12:17:31 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/27 16:21:13 by omarchic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,37 @@ typedef struct	s_data {
 	t_final parse;
 }				t_data;
 
+typedef struct s_dda{
+	double ray_angle;
+    float distance;
+    int is_up;
+    int is_left;
+    float wall_hit_x_horiz;
+    float wall_hit_y_horiz;
+    float wall_hit_x_verti;
+    float wall_hit_y_verti;
+    float x_horiz_intercept;
+    float y_horiz_intercept;
+    float x_verti_intercept;
+    float y_verti_intercept;
+    float x_horiz_step;
+    float y_horiz_step;
+    float x_verti_step;
+    float y_verti_step;
+    float x_horiz_touch;
+    float y_horiz_touch;
+    float x_verti_touch;
+    float y_verti_touch;
+    double horz_hit_distance;
+    double verti_hit_distance;
+	float x_to_check;
+	float y_to_check;
+    float wall_hit_x;
+    float wall_hit_y;
+    int found_horz_hit;
+    int found_verti_hit;
+}					t_dda;
+
 
 unsigned int    bibo_mlx_pixel_put(t_data *data, int x, int y);
 t_txt	*new_img(t_data *data, char *path);
@@ -159,5 +190,5 @@ void	render_game(t_data *data);
 int		key_hook1(t_data *data);
 int		press_up(int keycode, t_data *data);
 int		press_down(int keycode, t_data *data);
-
+void    init_dda(t_dda *t, t_data *data, double angle);
 #endif
