@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_handling.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omarchic <omarchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 15:29:35 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/27 18:51:42 by omarchic         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:20:27 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,16 @@ int	close_window(t_data *data)
 	exit(0);
 }
 
-// this function handles the key presses the 5 is added 
-// for more speed feel free to play with it if you want to 
-// increment or decrement the player's speed 
-// tho you gotta change it in the check_boundary function too
-// D === 2
-// A === 0
-// right = 124
-// left  = 123
+/*
+this function handles the key presses the 5 is added
+for more speed feel free to play with it if you want to
+increment or decrement the player's speed
+tho you gotta change it in the check_boundary function too
+D === 2
+A === 0
+right = 124
+left  = 123
+*/
 
 int	press_down(int keycode, t_data *data)
 {

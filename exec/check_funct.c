@@ -6,14 +6,16 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:39:36 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/28 11:27:36 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:21:41 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-// this function check if the pixel passed in the arguments is a wall
-// by dividing by the tile_size
+/*
+this function check if the pixel passed in the arguments is a wall
+by dividing by the tile_size
+*/
 int	is_wall(t_data *data, long x_touch, long y_touch)
 {
 	int	x;
@@ -27,9 +29,11 @@ int	is_wall(t_data *data, long x_touch, long y_touch)
 	return (0);
 }
 
-// this function is for testing purposes it check if 
-//the ray casted reached a wall
-// same as the function above ghir nssit kant deja 3ndi
+/*
+this function is for testing purposes it check if 
+he ray casted reached a wall
+same as the function above ghir nssit kant deja 3ndi
+*/
 int	check_ray(t_data *data, double x, double y)
 {
 	int		new_x;
@@ -62,15 +66,17 @@ void	cast_all_rays(t_data *data, double x, double y) // not tested
 				- data->rotationAngle);
 		angle += FOV_ANGLE / MAP_WIDTH;
 		angle = set_angle(angle);
-		draw_3d(data, real_distance, i, angle);
+		draw_3d(data, real_distance, i, select_texture(data, angle));
 		i++;
 	}
 }
 
-// check if the player can move or if he is limited by a wall
-// it handles moving between the walls by setting a rectangle
-// that have the player position and his new position as main points
-// and then checks the other vertices to avoid runnig through walls
+/*
+check if the player can move or if he is limited by a wall
+it handles moving between the walls by setting a rectangle
+that have the player position and his new position as main points
+and then checks the other vertices to avoid runnig through walls
+*/
 int	check_boundary(t_data *data, double add)
 {
 	int	x;

@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 18:27:29 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:55:14 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,11 +193,13 @@ void	set_player(t_data *data);
 double	set_angle(double angle);
 int		close_window(t_data *data);
 int		key_hook(int keycode, t_data *data);
-void	draw_3d(t_data *data, float distance, int x, float angle);
+void	draw_3d(t_data *data, float distance, int x, int imgX);
 void	render_background(t_data *data);
 void	render_game(t_data *data);
 int		key_hook1(t_data *data);
 int		press_up(int keycode, t_data *data);
 int		press_down(int keycode, t_data *data);
 void    init_dda(t_dda *t, t_data *data, double angle);
+
+int	select_texture(t_data *data, float angle);
 #endif

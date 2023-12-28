@@ -3,18 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omarchic <omarchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:27:53 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/27 18:48:39 by omarchic         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:22:05 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-// here is the main function of the project it returns
-// the distance between the player and the wall
-// using DDA
+/*
+here is the main function of the project it returns
+the distance between the player and the wall
+using DDA
+*/
 
 void	horiz_touch(t_dda *t, t_data *data)
 {

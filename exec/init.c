@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:22:52 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/28 11:26:58 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:38:38 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	set_player(t_data *data)
 		while (j < data->parse->width)
 		{
 			if (data->parse->map[i][j] == 'N' || data->parse->map[i][j] == 'W'
-				|| data->parse->map[i][j] == 'E' || data->parse->map[i][j] == 'S')
+				|| data->parse->map[i][j] == 'E'
+					|| data->parse->map[i][j] == 'S')
 			{
 				data->player_x = (i * TILE_SIZE) + step + 5;
 				data->player_y = (j * TILE_SIZE) + step + 5;
