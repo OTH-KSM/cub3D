@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:48:36 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 20:41:27 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 22:07:48 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	select_texture(t_data *data, float angle)
 
 	if (!data->check_test)
 	{
-		if (angle >= _ea_mac && angle < _we_mac)
+		if (angle >= EA && angle < WE)
 			data->tmp = data->so;
 		else
 			data->tmp = data->no;
@@ -27,7 +27,7 @@ int	select_texture(t_data *data, float angle)
 	}
 	else
 	{
-		if (angle > _so_mac && angle <= _no_mac)
+		if (angle > SO && angle <= NO)
 			data->tmp = data->we;
 		else
 			data->tmp = data->ea;
@@ -67,15 +67,15 @@ void	draw_3d(t_data *data, float distance, int x, int imgX)
 		end = MAP_HEIGHT;
 	i = 0;
 	while (i < start)
-		my_mlx_pixel_put(data, x, i++, data->parse->C);
+		my_mlx_pixel_put(data, x, i++, data->parse->c);
 	while (i < end)
 	{
-		my_mlx_pixel_put(data, x, i, bibo_mlx_pixel_put(data, imgX,
-				draw_walls(data, wall_height, imgX, i)));
+		my_mlx_pixel_put(data, x, i, (unsigned int)bibo_mlx_pixel_put
+			(data, imgX, draw_walls(data, wall_height, imgX, i)));
 		i++;
 	}
 	while (i < MAP_HEIGHT)
-		my_mlx_pixel_put(data, x, i++, data->parse->F);
+		my_mlx_pixel_put(data, x, i++, data->parse->f);
 }
 
 void	render_background(t_data *data)

@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 20:41:27 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 22:08:22 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,46 +28,50 @@
 # define TILE_SIZE 64
 # define ROWS 7
 # define COLUMNS 10
-# define FOV_ANGLE (60 * (M_PI / 180))
+// FOV_ANGLE = 60 * (PI / 180)
+# define FOV_ANGLE 1.0471975512
 # define NUM_RAYS 1920
 # define WALL_WIDTH 100
-# define _no_mac 4.72
-# define _ea_mac 0
-# define _so_mac 1.57
-# define _we_mac 3.14
+# define NO 4.72
+# define EA 0
+# define SO 1.57
+# define WE 3.14
 
 /*************************************************************************/
-// Genre 0 = Dir || 1 = Col
-typedef struct	s_elemlist	{
-	char				*Key;
-	char				*Value1;
-	char				*Value2;
-	char				*Value3;
+// genre 0 = Dir || 1 = ol
+typedef struct s_elemlist
+{
+	char				*key;
+	char				*value1;
+	char				*value2;
+	char				*value3;
 	int					found;
-	int					Genre;
-	struct	s_elemlist	*next_elem;
+	int					genre;
+	struct s_elemlist	*next_elem;
 }	t_elist;
 
-typedef struct	s_FinalElem	{
+typedef struct s_FinalElem
+{
 	char				*no;
 	char				*so;
 	char				*we;
 	char				*ea;
-	int					F;
-	int					C;
+	int					f;
+	int					c;
 	int					width;
 	int					height;
 	char				**map;
-	struct	s_FilanElem *next_elem;
+	struct s_FilanElem	*next_elem;
 }	t_final;
 
-typedef struct s_txt {
+typedef struct s_txt
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_lenght;
 	int		endian;
-	int 	width;
+	int		width;
 	int		height;
 }				t_txt;
 
@@ -75,7 +79,7 @@ typedef struct s_txt {
 int		validate_input_and_file(int argc, char *argv[]);
 t_final	*validate_file_content(char *argv);
 int		*return_statistics(char *argv);
-t_elist	*inialize_linked_list();
+t_elist	*inialize_linked_list(void);
 /*Phase01*/
 t_elist	*check_elements(int fd, int last);
 char	*removespaces(char *str);
@@ -109,11 +113,10 @@ bool	return_bool(char *tmp, char **solutions, bool value);
 char	*replace(char *line, int len);
 /*************************************************************************/
 
-extern char map[ROWS][COLUMNS];
-
-// turnDirection; // -1 for left, +1 for right
-// walkDirection; //-1 for back, +1 for front
-typedef struct s_data {
+// turn_direction; // -1 for left, +1 for right
+// walk_direction; //-1 for back, +1 for front
+typedef struct s_data
+{
 	void	*mlx;
 	void	*mlx_win;
 	void	*img;
@@ -125,13 +128,13 @@ typedef struct s_data {
 	float	player_y;
 	float	p_width;
 	float	p_height;
-	int		turnDirection;
-	int		walkDirection;
-	float	rotationAngle;
-	float	walkSpeed;
-	float	turnSpeed;
+	int		turn_direction;
+	int		walk_direction;
+	float	rotation_angle;
+	float	walk_speed;
+	float	turn_speed;
 	float	ray_distance;
-	int 	check_test;
+	int		check_test;
 	float	hit_h_x;
 	float	hit_h_y;
 	float	hit_v_x;
@@ -146,7 +149,8 @@ typedef struct s_data {
 	t_final	*parse;
 }	t_data;
 
-typedef struct s_dda{
+typedef struct s_dda
+{
 	double	ray_angle;
 	float	distance;
 	int		is_up;
@@ -177,8 +181,7 @@ typedef struct s_dda{
 	int		found_verti_hit;
 }					t_dda;
 
-unsigned int	bibo_mlx_pixel_put(t_data *data, int x, int y);
-
+int		bibo_mlx_pixel_put(t_data *data, int x, int y);
 t_txt	*new_img(t_data *data, char *path);
 int		is_wall(t_data *data, long x_touch, long y_touch);
 int		check_ray(t_data *data, double x, double y);
@@ -199,6 +202,5 @@ int		key_hook1(t_data *data);
 int		press_up(int keycode, t_data *data);
 int		press_down(int keycode, t_data *data);
 void	init_dda(t_dda *t, t_data *data, double angle);
-
 int		select_texture(t_data *data, float angle);
 #endif

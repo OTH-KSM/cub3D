@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 15:29:35 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/28 19:20:27 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 22:23:35 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,19 @@ int	key_hook1(t_data *data)
 	if (data->move == 1 && check_boundary(data, 0) == 0)
 		rotate = 0;
 	else if (data->turn == 1)
-		data->rotationAngle += 0.05;
+		data->rotation_angle += 0.05;
 	else if (data->move == -1 && check_boundary(data, M_PI) == 0)
 		rotate = M_PI;
 	else if (data->turn == -1)
-		data->rotationAngle -= 0.05;
+		data->rotation_angle -= 0.05;
 	else if (data->move == 2 && check_boundary(data, M_PI / 2) == 0)
 		rotate = M_PI / 2;
 	else if (data->move == 3 && check_boundary(data, -M_PI / 2) == 0)
 		rotate = -M_PI / 2;
 	if (rotate != 1)
 	{
-		data->player_x += cos(data->rotationAngle + rotate) * 5;
-		data->player_y += sin(data->rotationAngle + rotate) * 5;
+		data->player_x += cos(data->rotation_angle + rotate) * 10;
+		data->player_y += sin(data->rotation_angle + rotate) * 10;// 5
 	}
 	render_game(data);
 	return (0);

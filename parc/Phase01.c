@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 20:38:30 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 21:47:57 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ bool	it_match_dir(t_elist *elem, char *sample, char **solutions, int token)
 	return (return_bool(tmp, solutions, 0));
 }
 
-//count -> [F, C]
+//count -> [f, C]
 bool	it_match_col(t_elist *elem, char *sample, char **solutions, int token)
 {
 	static int	count[2];
@@ -113,12 +113,12 @@ void	verify_filling(t_elist *elem)
 	{
 		if (elem->found != 1)
 			print_error_and_exit("Missing Elements or Elements Repetition\n");
-		if (elem->Genre == 0)
+		if (elem->genre == 0)
 		{
 			if (check_dir_values(elem) == -1)
 				exit (1);
 		}
-		else if (elem->Genre == 1)
+		else if (elem->genre == 1)
 		{
 			if (check_col_values(elem) == -1)
 				exit (1);

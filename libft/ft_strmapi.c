@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 02:34:41 by okassimi          #+#    #+#             */
-/*   Updated: 2022/11/17 09:08:08 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 22:10:42 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	if (!s || !f)
 		return (0);
-		len = ft_strlen(s);
+	len = ft_strlen(s);
 	p = malloc(len * sizeof(char) + 1);
 	if (!p)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 02:28:21 by okassimi          #+#    #+#             */
-/*   Updated: 2022/11/13 12:23:59 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 22:10:58 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,4 @@ char	*ft_strnstr(char *str, char *to_find, size_t len)
 		i++;
 	}
 	return (0);
-}
-
-int main()
-{
-    //char str[] = NULL;
-    //char to[] = "hella";
-    printf("%s", ft_strnstr("hello\nworld", "\n", 8));
-    // printf("%s", ft_strnstr("hellowothman, "hello", 5));
-    // printf("%s", ft_strnstr("hellowothmane", "othmanee", 30));
-    // printf("%s", ft_strnstr("hellowothmane", "othmanee", 5));
-    // printf("%s", ft_strnstr("hellowothmane", "owo", 5));
-    // printf("%s", ft_strnstr("hellowothmane", "", 5));
-    // printf("%s", ft_strnstr("hellowothmane", "hello", 25));
 }

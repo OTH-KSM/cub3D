@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 20:09:44 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 21:44:49 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,10 @@ t_elist	*inialize_linked_list(void)
 	while (i < 6)
 	{
 		elem->found = 0;
-		elem->Key = NULL;
-		elem->Value1 = NULL;
-		elem->Value2 = NULL;
-		elem->Value3 = NULL;
+		elem->key = NULL;
+		elem->value1 = NULL;
+		elem->value2 = NULL;
+		elem->value3 = NULL;
 		elem->next_elem = malloc(sizeof(t_elist));
 		if (i == 5)
 		{

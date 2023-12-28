@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:45:24 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 18:46:32 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 22:07:10 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_txt	*new_img(t_data *data, char *path)
 	return (txt);
 }
 
-unsigned int	bibo_mlx_pixel_put(t_data *data, int x, int y)
+int	bibo_mlx_pixel_put(t_data *data, int x, int y)
 {
 	char			*mlx_data_addr;
 	unsigned int	pos;

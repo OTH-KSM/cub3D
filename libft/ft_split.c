@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:45:05 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/14 16:58:58 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 22:11:59 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,6 @@ static char	**oussa(char **result, int k)
 	return (0);
 }
 // i    j    k   count 
-
-struct s_pouss {
-	int		v[4];
-	char	**p;
-} pos;
 
 char	**ft_split(char const *s, char c)
 {

@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:24:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 20:40:48 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 21:49:33 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	free_elem(t_elist *head)
 
 	while (head)
 	{
-		if (head->Key)
-			free(head->Key);
-		if (head->Value1)
-			free(head->Value1);
-		if (head->Value2)
-			free(head->Value2);
-		if (head->Value3)
-			free(head->Value3);
+		if (head->key)
+			free(head->key);
+		if (head->value1)
+			free(head->value1);
+		if (head->value2)
+			free(head->value2);
+		if (head->value3)
+			free(head->value3);
 		tmp = head;
 		head = head->next_elem;
 		free(tmp);
@@ -41,20 +41,20 @@ void	pass_elem(t_elist *met, t_final *data)
 {
 	while (met)
 	{
-		if (!ft_strncmp(met->Key, "NO", 2))
-			data->no = ft_strdup(met->Value1);
-		else if (!ft_strncmp(met->Key, "SO", 2))
-			data->so = ft_strdup(met->Value1);
-		else if (!ft_strncmp(met->Key, "EA", 2))
-			data->ea = ft_strdup(met->Value1);
-		else if (!ft_strncmp(met->Key, "WE", 2))
-			data->we = ft_strdup(met->Value1);
-		else if (!ft_strncmp(met->Key, "F", 1))
-			data->F = rgb_to_int(ft_atoi(met->Value1),
-					ft_atoi(met->Value2), ft_atoi(met->Value3));
-		else if (!ft_strncmp(met->Key, "C", 1))
-			data->C = rgb_to_int(ft_atoi(met->Value1),
-					ft_atoi(met->Value2), ft_atoi(met->Value3));
+		if (!ft_strncmp(met->key, "NO", 2))
+			data->no = ft_strdup(met->value1);
+		else if (!ft_strncmp(met->key, "SO", 2))
+			data->so = ft_strdup(met->value1);
+		else if (!ft_strncmp(met->key, "EA", 2))
+			data->ea = ft_strdup(met->value1);
+		else if (!ft_strncmp(met->key, "WE", 2))
+			data->we = ft_strdup(met->value1);
+		else if (!ft_strncmp(met->key, "F", 1))
+			data->f = rgb_to_int(ft_atoi(met->value1),
+					ft_atoi(met->value2), ft_atoi(met->value3));
+		else if (!ft_strncmp(met->key, "C", 1))
+			data->c = rgb_to_int(ft_atoi(met->value1),
+					ft_atoi(met->value2), ft_atoi(met->value3));
 		met = met->next_elem;
 	}
 }

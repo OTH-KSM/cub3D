@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/13 02:47:43 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/16 12:59:06 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 22:13:09 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,13 @@ typedef struct s_struct
 	int			jeton;
 	int			j;
 	int			check;
-}t_pos;
+}	t_pos;
+
+struct s_pouss
+{
+	int		v[4];
+	char	**p;
+} pos;
 
 char	*get_next_line(int fd);
 char	*ft_gnlstrjoin(char *s1, char *s2);
@@ -43,7 +49,6 @@ char	*ft_gnlsubstr(char *s, unsigned int start, size_t len);
 char	*ft_gnlstrdup(const char *s1);
 
 //    ***    Libft Part    **
-
 
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t n);

@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:39:36 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/28 19:21:41 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 22:23:59 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	check_ray(t_data *data, double x, double y)
 
 	new_x = x / TILE_SIZE;
 	new_y = y / TILE_SIZE;
-	angle = cos(data->rotationAngle - (FOV_ANGLE / 2));
+	angle = cos(data->rotation_angle - (FOV_ANGLE / 2));
 	if (data->parse->map[new_x][new_y] == '1')
 		return (1);
 	return (0);
@@ -59,11 +59,11 @@ void	cast_all_rays(t_data *data, double x, double y) // not tested
 
 	i = 0;
 	j = 0;
-	angle = data->rotationAngle - (FOV_ANGLE / 2);
+	angle = data->rotation_angle - (FOV_ANGLE / 2);
 	while (i < MAP_WIDTH)
 	{
 		real_distance = check_interception(data, angle) * cos(angle
-				- data->rotationAngle);
+				- data->rotation_angle);
 		angle += FOV_ANGLE / MAP_WIDTH;
 		angle = set_angle(angle);
 		draw_3d(data, real_distance, i, select_texture(data, angle));
@@ -84,8 +84,8 @@ int	check_boundary(t_data *data, double add)
 	int	x1;
 	int	y1;
 
-	x1 = (data->player_x + cos(data->rotationAngle + add) * 5) / TILE_SIZE;
-	y1 = (data->player_y + sin(data->rotationAngle + add) * 5) / TILE_SIZE;
+	x1 = (data->player_x + cos(data->rotation_angle + add) * 10) / TILE_SIZE;
+	y1 = (data->player_y + sin(data->rotation_angle + add) * 10) / TILE_SIZE;
 	x = data->player_x / TILE_SIZE;
 	y = data->player_y / TILE_SIZE;
 	if (data->parse->map[x1][y1] == '1' || (data->parse->map[x][y1] == '1'

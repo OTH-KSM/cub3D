@@ -6,14 +6,14 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/27 16:03:29 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/16 13:00:13 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 22:14:24 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 static	int	isthere_anl(char **temp, char **buffer, char *sta, int *j)
-{	
+{
 	*buffer = ft_gnlstrdup("");
 	*temp = malloc(BUFFER_SIZE + 1 * sizeof(char));
 	if (!temp || !buffer)
@@ -40,7 +40,7 @@ static	char	*ft_free(char **s1, char **s2, char **s3, int k)
 		return (*s3);
 	}
 	else if (k == 1)
-		{
+	{
 		free(*s1);
 		free(*s2);
 		return (NULL);
@@ -63,7 +63,7 @@ static	int	ft_checknl(char **buffer, char *tmp, int *jeton, int rdd)
 	if (rdd == 0)
 		*jeton = 1;
 	else
-	{	
+	{
 		if (*buffer[j] == '\n')
 		{
 			*jeton = 1;
@@ -72,7 +72,7 @@ static	int	ft_checknl(char **buffer, char *tmp, int *jeton, int rdd)
 		while (tmp[j])
 		{
 			if (tmp[j] == '\n')
-			{	
+			{
 				*jeton = 1;
 				break ;
 			}
