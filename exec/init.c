@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omarchic <omarchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:22:52 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/27 13:28:37 by omarchic         ###   ########.fr       */
+/*   Updated: 2023/12/28 11:26:58 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ void	set_player(t_data *data)
 	i = 0;
 	j = 0;
 	step = TILE_SIZE / 2;
-	while (i < data->parse.height)
+	while (i < data->parse->height)
 	{
-		while (j < data->parse.width)
+		while (j < data->parse->width)
 		{
-			if (data->parse.map[i][j] == 'N' || data->parse.map[i][j] == 'W'
-				|| data->parse.map[i][j] == 'E' || data->parse.map[i][j] == 'S')
+			if (data->parse->map[i][j] == 'N' || data->parse->map[i][j] == 'W'
+				|| data->parse->map[i][j] == 'E' || data->parse->map[i][j] == 'S')
 			{
 				data->player_x = (i * TILE_SIZE) + step + 5;
 				data->player_y = (j * TILE_SIZE) + step + 5;
-				set_p_view(data, data->parse.map[i][j]);
+				set_p_view(data, data->parse->map[i][j]);
 			}
 			j++;
 		}

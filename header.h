@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   header.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omarchic <omarchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/27 16:21:13 by omarchic         ###   ########.fr       */
+/*   Updated: 2023/12/28 13:19:25 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,30 +72,38 @@ typedef struct s_txt {
 
 /*Validation*/
 int			_ValidateInputAndFile(int argc, char *argv[]);
-t_final		_ValidateFileContent(char *argv);
+t_final		*_ValidateFileContent(char *argv);
 int*		_ReturnStatistics(char *argv);
 t_elist*	_InializeLinkedList();
 /*Phase01*/
-t_elist		*_CheckEelements(int fd, int last);
-bool		_ItMatchDir(t_elist *elem, char *sample, char **solutions, int token);
-bool		_ItMatchCol(t_elist *elem, char *sample, char **solutions, int token);
-int			_CheckDirValues(t_elist *elem);
-int			_isDigit(char *str);
-int			_CheckColValues(t_elist *elem);
+t_elist	*check_elements(int fd, int last);
+char	*removespaces(char *str);
+void	verify_filling(t_elist *elem);
+void	fill_col(t_elist *elem, char *line);
+void	fill_dir(t_elist *elem, char *line);
+bool	it_match_dir(t_elist *elem, char *sample, char **solutions, int token);
+bool	it_match_col(t_elist *elem, char *sample, char **solutions, int token);
+int	check_dir_values(t_elist *elem);
+int	is_digit(char *str);
+int	check_col_values(t_elist *elem);
 /*Phase02*/
-char		**_CheckMap(int fd, int maxlen, int lines, int last);
-char		*_Fill(char *str, int maxlen);
+char	**check_map(int fd, int maxlen, int lines, int last);
+char	*fill(char *str, int maxlen);
 /*Phase03*/
 void		_ItterateTheMap(char **map, int mapL);
 int			_ParsFirstLine(char **map, int mapL);
 int			_ParsLastLine(char **map,int mapL);
 int			_ParsMiddle(char **map, int mapL);
 /*Pass Data*/
-t_final		_PassingTheData(t_elist *met, char **map, int lines);
-int			_RGBtoInt(int R, int G, int B);
+t_final		*passing_the_data(t_elist *met, char **map, int lines);
+void		pass_elem(t_elist *met, t_final *data);
+void		pass_map(char **map, t_final *data, int lines);
+int			rgb_to_int(int R, int G, int B);
 
-
-void	free_2D_array(char **array);
+int		print_error_and_return(char *str);
+void	print_error_and_exit(char *str);
+void	free_elem(t_elist *head);
+void	free_2d_array(char **array);
 /****************************************************************************************************/
 
 extern char map[ROWS][COLUMNS];
@@ -130,7 +138,7 @@ typedef struct	s_data {
 	t_txt	*EA;
 	t_txt	*WE;
 	t_txt	*tmp;
-	t_final parse;
+	t_final *parse;
 }				t_data;
 
 typedef struct s_dda{

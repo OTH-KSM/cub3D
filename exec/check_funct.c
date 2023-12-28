@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_funct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omarchic <omarchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:39:36 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/27 18:43:32 by omarchic         ###   ########.fr       */
+/*   Updated: 2023/12/28 11:27:36 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	is_wall(t_data *data, long x_touch, long y_touch)
 
 	x = x_touch / TILE_SIZE;
 	y = y_touch / TILE_SIZE;
-	if (x < data->parse.height && y < data->parse.width
-		&& data->parse.map[x][y] == '1')
+	if (x < data->parse->height && y < data->parse->width
+		&& data->parse->map[x][y] == '1')
 		return (1);
 	return (0);
 }
@@ -39,7 +39,7 @@ int	check_ray(t_data *data, double x, double y)
 	new_x = x / TILE_SIZE;
 	new_y = y / TILE_SIZE;
 	angle = cos(data->rotationAngle - (FOV_ANGLE / 2));
-	if (data->parse.map[new_x][new_y] == '1')
+	if (data->parse->map[new_x][new_y] == '1')
 		return (1);
 	return (0);
 }
@@ -82,8 +82,8 @@ int	check_boundary(t_data *data, double add)
 	y1 = (data->player_y + sin(data->rotationAngle + add) * 5) / TILE_SIZE;
 	x = data->player_x / TILE_SIZE;
 	y = data->player_y / TILE_SIZE;
-	if (data->parse.map[x1][y1] == '1' || (data->parse.map[x][y1] == '1'
-						&& data->parse.map[x1][y] == '1'))
+	if (data->parse->map[x1][y1] == '1' || (data->parse->map[x][y1] == '1'
+						&& data->parse->map[x1][y] == '1'))
 		return (1);
 	return (0);
 }

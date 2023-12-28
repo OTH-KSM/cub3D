@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 16:35:26 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 13:19:45 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	_ValidateInputAndFile(int argc, char *argv[])	{
 	return (0);
 }
 
-t_final	_ValidateFileContent(char *argv)	{
+t_final	*_ValidateFileContent(char *argv)	{
 	// array instead of three variable when each one calls the _ReturnStatistics
 	int *counted = _ReturnStatistics(argv); // [maxlen, lines, last]
 	int fd = open(argv, O_RDONLY);
@@ -41,16 +41,16 @@ t_final	_ValidateFileContent(char *argv)	{
 		write(2, "Error: File Empty\n", 18);
 		exit (1);
 	}
-	t_elist *head = _CheckEelements(fd, counted[2]);
-	char **map = _CheckMap(fd, counted[0], counted[1], counted[2]);
+	t_elist *head = check_elements(fd, counted[2]);
+	char **map = check_map(fd, counted[0], counted[1], counted[2]);
 	/*Printing the map*/
 	// printf("printing map\n");
 	// for (int k = 0; map[k]; k++)  {
 	// 	printf("%s\n", map[k]);
 	// }
 	_ItterateTheMap(map, counted[1] - counted[2]);
-	t_final data;
-	data = _PassingTheData(head, map, counted[1] - counted[2]);
+	t_final *data;
+	data = passing_the_data(head, map, counted[1] - counted[2]);
 	free(counted);
 	close (fd);
 	return (data);

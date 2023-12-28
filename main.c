@@ -17,6 +17,7 @@ int	main(int argc, char *argv[])
     if (_ValidateInputAndFile(argc, argv))
         return (-1);
     img.parse = _ValidateFileContent(argv[1]);
+    // exit (0);
         // data is the struct :
         /*
             typedef struct	s_FinalElem	{
@@ -39,15 +40,10 @@ int	main(int argc, char *argv[])
 	img.img = mlx_new_image(img.mlx, MAP_WIDTH, MAP_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
     img.turn = 0;
-    printf("%s\n", img.parse.NO);
-    printf("%s\n", img.parse.SO);
-    printf("%s\n", img.parse.EA);
-    printf("%s\n", img.parse.WE);
-    img.NO = new_img(&img, img.parse.NO);
-    img.SO = new_img(&img, img.parse.SO);
-    img.EA = new_img(&img, img.parse.EA);
-    img.WE = new_img(&img, img.parse.WE);
-    // exit (0);
+    img.NO = new_img(&img, img.parse->NO);
+    img.SO = new_img(&img, img.parse->SO);
+    img.EA = new_img(&img, img.parse->EA);
+    img.WE = new_img(&img, img.parse->WE);
     set_player(&img);
 	render_game(&img);
     // mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);
