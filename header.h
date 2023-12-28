@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 13:19:25 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:19:31 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,10 +90,10 @@ int	check_col_values(t_elist *elem);
 char	**check_map(int fd, int maxlen, int lines, int last);
 char	*fill(char *str, int maxlen);
 /*Phase03*/
-void		_ItterateTheMap(char **map, int mapL);
-int			_ParsFirstLine(char **map, int mapL);
-int			_ParsLastLine(char **map,int mapL);
-int			_ParsMiddle(char **map, int mapL);
+void	itterate_the_map(char **map, int mapL);
+int pars_first_line(char **map, int mapL);
+int	pars_last_line(char **map, int mapL);
+int pars_middle(char **map, int mapL);
 /*Pass Data*/
 t_final		*passing_the_data(t_elist *met, char **map, int lines);
 void		pass_elem(t_elist *met, t_final *data);
@@ -104,6 +104,7 @@ int		print_error_and_return(char *str);
 void	print_error_and_exit(char *str);
 void	free_elem(t_elist *head);
 void	free_2d_array(char **array);
+bool	return_bool(char *tmp, char **solutions, bool value);
 /****************************************************************************************************/
 
 extern char map[ROWS][COLUMNS];

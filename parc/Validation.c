@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 13:19:45 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:19:55 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_final	*_ValidateFileContent(char *argv)	{
 	// for (int k = 0; map[k]; k++)  {
 	// 	printf("%s\n", map[k]);
 	// }
-	_ItterateTheMap(map, counted[1] - counted[2]);
+	itterate_the_map(map, counted[1] - counted[2]);
 	t_final *data;
 	data = passing_the_data(head, map, counted[1] - counted[2]);
 	free(counted);
