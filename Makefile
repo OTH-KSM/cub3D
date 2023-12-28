@@ -1,5 +1,5 @@
-CFLAGS = -fsanitize=address -g3
-PSRC = parc/remain.c parc/Validation.c parc/Phase01.c parc/Phase02.c parc/Phase03.c parc/PassData.c
+CFLAGS = #-fsanitize=address -g3
+PSRC = parc/remain.c parc/Validation.c parc/Phase01.c parc/Phase02.c parc/Phase03.c parc/PassData.c parc/Phase01_ut.c parc/add_fun.c
 ESRC = exec/check_funct.c exec/dda.c exec/draw_func.c exec/init.c exec/key_handling.c exec/render.c exec/dda_init.c
 GSRC = main.c #global variables
 OBJ = $(ESRC:.c=.o) $(PSRC:.c=.o) $(GSRC:.c=.o)
