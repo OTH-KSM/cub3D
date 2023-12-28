@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:24:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 12:46:01 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:40:48 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ void	pass_elem(t_elist *met, t_final *data)
 	while (met)
 	{
 		if (!ft_strncmp(met->Key, "NO", 2))
-			data->NO = ft_strdup(met->Value1);
+			data->no = ft_strdup(met->Value1);
 		else if (!ft_strncmp(met->Key, "SO", 2))
-			data->SO = ft_strdup(met->Value1);
+			data->so = ft_strdup(met->Value1);
 		else if (!ft_strncmp(met->Key, "EA", 2))
-			data->EA = ft_strdup(met->Value1);
+			data->ea = ft_strdup(met->Value1);
 		else if (!ft_strncmp(met->Key, "WE", 2))
-			data->WE = ft_strdup(met->Value1);
+			data->we = ft_strdup(met->Value1);
 		else if (!ft_strncmp(met->Key, "F", 1))
 			data->F = rgb_to_int(ft_atoi(met->Value1),
 					ft_atoi(met->Value2), ft_atoi(met->Value3));

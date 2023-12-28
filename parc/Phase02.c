@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:15:54 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 20:09:28 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:32:18 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*fill(char *str, int maxlen)
 	i = 0;
 	while (str[i] && str[i] != '\n')
 	{
-		if (!ft_strchr("NSWE10 ", str[i]))
+		if (!ft_strchr("NSwe10 ", str[i]))
 			print_error_and_exit("Wrong Character in the Map\n");
 		new[i] = str[i];
 		i++;

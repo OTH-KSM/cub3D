@@ -4,10 +4,10 @@
     // data is the struct :
     /*
         typedef struct	s_FinalElem	{
-        char	*NO;
-        char	*SO;
-        char	*WE;
-        char	*EA;
+        char	*no;
+        char	*so;
+        char	*we;
+        char	*ea;
         int		F;
         int		C;
         int     height;
@@ -32,10 +32,10 @@ int	main(int argc, char *argv[])
 	img.img = mlx_new_image(img.mlx, MAP_WIDTH, MAP_HEIGHT);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
     img.turn = 0;
-    img.NO = new_img(&img, img.parse->NO);
-    img.SO = new_img(&img, img.parse->SO);
-    img.EA = new_img(&img, img.parse->EA);
-    img.WE = new_img(&img, img.parse->WE);
+    img.no = new_img(&img, img.parse->no);
+    img.so = new_img(&img, img.parse->so);
+    img.ea = new_img(&img, img.parse->ea);
+    img.we = new_img(&img, img.parse->we);
     set_player(&img);
 	render_game(&img);
     // mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);

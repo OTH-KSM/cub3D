@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:11 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/21 19:12:58 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:33:25 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 //     if (_ValidateInputAndFile(argc, argv))
 //         return (-1);
 //     data = _ValidateFileContent(argv[1]);
-//     printf("%s\n", data.NO);
-// 	printf("%s\n", data.SO);
-// 	printf("%s\n", data.WE);
-// 	printf("%s\n", data.EA);
+//     printf("%s\n", data.no);
+// 	printf("%s\n", data.so);
+// 	printf("%s\n", data.we);
+// 	printf("%s\n", data.ea);
 // 	printf("%d\n", data.F);
 // 	printf("%d\n", data.C);
 //     printf("height : %d\n", data.height);

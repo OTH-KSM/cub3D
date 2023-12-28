@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 19:28:35 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:38:30 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	dow(int fd, t_elist **elem)
 	free(line);
 }
 
-// count -> [NO, SO, WE, EA]
+// count -> [no, so, we, ea]
 t_elist	*check_elements(int fd, int last)
 {
 	int		i;
