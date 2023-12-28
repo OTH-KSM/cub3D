@@ -6,11 +6,12 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:15:54 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 13:20:00 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:09:28 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
+
 //line 20 : if no line in the part of the map so print an error
 char	**check_map(int fd, int maxlen, int lines, int last)
 {
@@ -53,10 +54,7 @@ char	*fill(char *str, int maxlen)
 	}
 	j = i;
 	while (i < maxlen - 1)
-	{
-		new[i] = ' ';
-		i++;
-	}
+		new[i++] = ' ';
 	if (str[j] == '\n')
 	{
 		if (j == 0)

@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 18:55:14 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:28:03 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ void	print_error_and_exit(char *str);
 void	free_elem(t_elist *head);
 void	free_2d_array(char **array);
 bool	return_bool(char *tmp, char **solutions, bool value);
+char	*replace(char *line, int len);
 /****************************************************************************************************/
 
 extern char map[ROWS][COLUMNS];

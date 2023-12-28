@@ -1,15 +1,24 @@
 #include "header.h"
 
-// char map[ROWS][COLUMNS] = {
-//     {'1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
-//     {'1', '0', '1', '0', '0', '0', '0', '0', '0', '1'},
-//     {'1', '0', '1', '0', '1', '0', '0', '0', '0', '1'},
-//     {'1', '0', '1', '1', '0', '0', '0', '0', '0', '1'},
-//     {'1', '0', '0', '0', '0', 'P', '0', '0', '0', '1'},
-//     {'1', '0', '0', '1', '0', '0', '0', '0', '0', '1'},
-//     {'1', '1', '1', '1', '1', '1', '1', '1', '1', '1'},
-// }; // we are working now with the parsed map
-
+// exit (0);
+    // data is the struct :
+    /*
+        typedef struct	s_FinalElem	{
+        char	*NO;
+        char	*SO;
+        char	*WE;
+        char	*EA;
+        int		F;
+        int		C;
+        int     height;
+        int     width;
+        char	**map;
+        struct	s_FilanElem *next_elem;
+    }	t_final;
+    */
+    // You have accsess to the map 
+    // height and width are your infomation about the map that you wanted
+    
 int	main(int argc, char *argv[])
 {
     t_final parse;
@@ -17,24 +26,7 @@ int	main(int argc, char *argv[])
     if (validate_input_and_file(argc, argv))
         return (-1);
     img.parse = validate_file_content(argv[1]);
-    // exit (0);
-        // data is the struct :
-        /*
-            typedef struct	s_FinalElem	{
-            char	*NO;
-            char	*SO;
-            char	*WE;
-            char	*EA;
-            int		F;
-            int		C;
-            int     height;
-            int     width;
-            char	**map;
-            struct	s_FilanElem *next_elem;
-        }	t_final;
-        */
-        // You have accsess to the map 
-        // height and width are your infomation about the map that you wanted
+
 	img.mlx = mlx_init();
 	img.mlx_win = mlx_new_window(img.mlx, MAP_WIDTH, MAP_HEIGHT, "Hello world!");
 	img.img = mlx_new_image(img.mlx, MAP_WIDTH, MAP_HEIGHT);

@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 19:23:31 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:28:35 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,7 @@ void	dow(int fd, t_elist **elem)
 	{
 		len = ft_strlen(line);
 		if (line[len - 1] == '\n')
-		{
-			tmp = line;
-			line = ft_substr(line, 0, len - 1);
-			free(tmp);
-		}
+			line = replace(line, len);
 		if (*elem)
 		{
 			if (it_match_dir(*elem, line, ft_split("NO -SO -WE -EA ", '-'), 1))

@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 18:35:09 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 20:09:44 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,46 +60,48 @@ t_final	*validate_file_content(char *argv)
 	return (data);
 }
 
+void	bring_data(char *tmp, int *stats, int *jeton, int *token)
+{
+	char	*trimed;
+	int		len;
+
+	trimed = ft_strtrim(tmp, " ");
+	if (!(*jeton) && ft_strchr("10", trimed[0]))
+	{
+		*jeton = 1;
+		*token = 1;
+		stats[2] = stats[1];
+	}
+	if (*token)
+	{
+		len = ft_strlen(tmp);
+		if (stats[0] < len)
+			stats[0] = len;
+	}
+	free(trimed);
+	stats[1]++;
+}
+
 // line 83 : a SEGV when entring strchr or strtrim when the EOF accure
+
 int	*return_statistics(char *argv)
 {
 	int		*stats;
 	int		fd;
-	int		len;
 	int		jeton;
 	int		token;
 	char	*tmp;
-	char	*trimed;
 
 	fd = open(argv, O_RDONLY);
 	stats = malloc(3 * sizeof(int));
 	ft_bzero(stats, 12);
-	len = 1;
 	jeton = 0;
 	token = 0;
 	while (1)
 	{
 		tmp = get_next_line(fd);
 		if (tmp)
-		{
-			trimed = ft_strtrim(tmp, " ");
-			if (!jeton && ft_strchr("10", trimed[0]))
-			{
-				jeton = 1;
-				token = 1;
-				stats[2] = stats[1];
-			}
-			if (token)
-			{
-				len = ft_strlen(tmp);
-				if (stats[0] < len)
-					stats[0] = len;
-			}
-			free(trimed);
-			if (len == 0)
-				break ;
-			stats[1]++;
-		}
+			bring_data(tmp, stats, &jeton, &token);
 		else
 		{
 			if (jeton == 0)
@@ -108,7 +110,6 @@ int	*return_statistics(char *argv)
 		}
 		free(tmp);
 	}
-	close(fd);
 	return (stats);
 }
 
