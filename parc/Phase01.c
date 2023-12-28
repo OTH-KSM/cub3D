@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 18:09:06 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:27:57 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_elist	*check_elements(int fd, int last)
 	t_elist	*elem;
 
 	i = 0;
-	elem = _InializeLinkedList();
+	elem = inialize_linked_list();
 	head = elem;
 	while (i < last)
 	{

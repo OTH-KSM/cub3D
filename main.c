@@ -14,9 +14,9 @@ int	main(int argc, char *argv[])
 {
     t_final parse;
 	t_data	img;
-    if (_ValidateInputAndFile(argc, argv))
+    if (validate_input_and_file(argc, argv))
         return (-1);
-    img.parse = _ValidateFileContent(argv[1]);
+    img.parse = validate_file_content(argv[1]);
     // exit (0);
         // data is the struct :
         /*

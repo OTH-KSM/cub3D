@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   add_fun.c                                          :+:      :+:    :+:   */
+/*   add_fun02.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 13:46:12 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 18:09:10 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:36:14 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,4 @@ int	is_digit(char *str)
 		i++;
 	}
 	return (0);
-}
-
-bool	return_bool(char *tmp, char **solutions, bool value)
-{
-	free(tmp);
-	free_2d_array(solutions);
-	return (value);
 }

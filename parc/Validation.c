@@ -6,24 +6,31 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 18:19:55 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:35:09 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-int	_ValidateInputAndFile(int argc, char *argv[])	{
-	if (argc != 2) {
+int	validate_input_and_file(int argc, char *argv[])
+{
+	int	len;
+	int	fd;
+
+	if (argc != 2)
+	{
 		write(2, "Error: Arguments\n", 17);
 		return (-1);
 	}
-	int len = ft_strlen(argv[1]);
-	if (len == 4 || ft_strncmp(argv[1] + len - 4, ".cub", 4))	{
+	len = ft_strlen(argv[1]);
+	if (len == 4 || ft_strncmp(argv[1] + len - 4, ".cub", 4))
+	{
 		write(2, "Error: File extention\n", 22);
 		return (-1);
 	}
-	int fd;
-	if ((fd = open(argv[1], O_RDONLY)) == -1)	{
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+	{
 		write(2, "Error: opening file\n", 20);
 		return (-1);
 	}
@@ -31,66 +38,61 @@ int	_ValidateInputAndFile(int argc, char *argv[])	{
 	return (0);
 }
 
-t_final	*_ValidateFileContent(char *argv)	{
-	// array instead of three variable when each one calls the _ReturnStatistics
-	int *counted = _ReturnStatistics(argv); // [maxlen, lines, last]
-	int fd = open(argv, O_RDONLY);
-	// printf("maxlen: %d\nlines: %d\nlast: %d\n",counted[0], counted[1], counted[2]);
-	// exit (0);
-	if (counted[1] == 0)	{
-		write(2, "Error: File Empty\n", 18);
-		exit (1);
-	}
-	t_elist *head = check_elements(fd, counted[2]);
-	char **map = check_map(fd, counted[0], counted[1], counted[2]);
-	/*Printing the map*/
-	// printf("printing map\n");
-	// for (int k = 0; map[k]; k++)  {
-	// 	printf("%s\n", map[k]);
-	// }
+// counted -> [maxlen, lines, last]
+t_final	*validate_file_content(char *argv)
+{
+	int		*counted;
+	t_elist	*head;
+	char	**map;
+	t_final	*data;
+	int		fd;
+
+	fd = open(argv, O_RDONLY);
+	counted = return_statistics(argv);
+	if (counted[1] == 0)
+		print_error_and_exit("Error: File Empty\n");
+	head = check_elements(fd, counted[2]);
+	map = check_map(fd, counted[0], counted[1], counted[2]);
 	itterate_the_map(map, counted[1] - counted[2]);
-	t_final *data;
 	data = passing_the_data(head, map, counted[1] - counted[2]);
 	free(counted);
-	close (fd);
+	close(fd);
 	return (data);
 }
-	
-	// while (head)	{
-	// 	printf("---------------------------------------------\n");
-	// 	printf("%s\n%s\n%s\n%s\n", head->Key, head->Value1, head->Value2, head->Value3);
-	// 	printf("%d\n", head->found);
-	// 	head = head->next_elem;
-	// }
 
-int*	_ReturnStatistics(char *argv)	{
-	int *stats;
-	int fd;
-	int len;
-	int jeton;
-	int token;
-	char *tmp;
-	char *trimed;
+// line 83 : a SEGV when entring strchr or strtrim when the EOF accure
+int	*return_statistics(char *argv)
+{
+	int		*stats;
+	int		fd;
+	int		len;
+	int		jeton;
+	int		token;
+	char	*tmp;
+	char	*trimed;
 
 	fd = open(argv, O_RDONLY);
 	stats = malloc(3 * sizeof(int));
 	ft_bzero(stats, 12);
 	len = 1;
-	jeton = 0; // [Maplen, line, last]
+	jeton = 0;
 	token = 0;
-	while (1)	{
+	while (1)
+	{
 		tmp = get_next_line(fd);
-		// a SEGV when entring strchr or strtrim when the EOF accure
-		if (tmp)    {
+		if (tmp)
+		{
 			trimed = ft_strtrim(tmp, " ");
-			if (!jeton && ft_strchr("10", trimed[0])) {
-				// printf("%s\n", tmp);
+			if (!jeton && ft_strchr("10", trimed[0]))
+			{
 				jeton = 1;
 				token = 1;
 				stats[2] = stats[1];
 			}
-			if (token)  {
-				if (stats[0] < (len = ft_strlen(tmp)))
+			if (token)
+			{
+				len = ft_strlen(tmp);
+				if (stats[0] < len)
 					stats[0] = len;
 			}
 			free(trimed);
@@ -98,34 +100,37 @@ int*	_ReturnStatistics(char *argv)	{
 				break ;
 			stats[1]++;
 		}
-		// this check if the map is emty so i should count the last line;
-		else    {
+		else
+		{
 			if (jeton == 0)
 				stats[2] = stats[1];
 			break ;
 		}
 		free(tmp);
 	}
-	// exit (0);
 	close(fd);
 	return (stats);
 }
 
-t_elist*	_InializeLinkedList()	{
-	int		i = 0;
-	t_elist *elem;
-	t_elist *head;
-	
+t_elist	*inialize_linked_list(void)
+{
+	int		i;
+	t_elist	*elem;
+	t_elist	*head;
+
 	elem = malloc(sizeof(t_elist));
 	head = elem;
-	while (i < 6)	{
+	i = 0;
+	while (i < 6)
+	{
 		elem->found = 0;
 		elem->Key = NULL;
 		elem->Value1 = NULL;
 		elem->Value2 = NULL;
 		elem->Value3 = NULL;
 		elem->next_elem = malloc(sizeof(t_elist));
-		if (i == 5)	{
+		if (i == 5)
+		{
 			free(elem->next_elem);
 			elem->next_elem = NULL;
 		}

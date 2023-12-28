@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 18:19:31 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 18:27:29 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,10 @@ typedef struct s_txt {
 }				t_txt;
 
 /*Validation*/
-int			_ValidateInputAndFile(int argc, char *argv[]);
-t_final		*_ValidateFileContent(char *argv);
-int*		_ReturnStatistics(char *argv);
-t_elist*	_InializeLinkedList();
+int	validate_input_and_file(int argc, char *argv[]);
+t_final	*validate_file_content(char *argv);
+int	*return_statistics(char *argv);
+t_elist *inialize_linked_list();
 /*Phase01*/
 t_elist	*check_elements(int fd, int last);
 char	*removespaces(char *str);
