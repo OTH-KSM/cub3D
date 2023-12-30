@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:45:24 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 22:07:10 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 19:16:24 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_txt	*new_img(t_data *data, char *path)
 
 	txt = (t_txt *)malloc(sizeof(t_txt));
 	if (!txt)
-		print_error_and_exit("invalid malloc\n");
+		print_error_and_exit("Allocation Failled\n");
 	txt->img = mlx_xpm_file_to_image(data->mlx, path,
 			&txt->width, &txt->height);
 	if (!txt->img)
@@ -72,7 +72,6 @@ t_txt	*new_img(t_data *data, char *path)
 int	bibo_mlx_pixel_put(t_data *data, int x, int y)
 {
 	char			*mlx_data_addr;
-	unsigned int	pos;
 
 	mlx_data_addr = data->tmp->addr + y * data->tmp->line_lenght + x
 		* (data->tmp->bits_per_pixel / 8);

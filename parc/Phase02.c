@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:15:54 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 20:32:18 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 19:18:21 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	**check_map(int fd, int maxlen, int lines, int last)
 	if (!maxlen)
 		print_error_and_exit("Empty map\n");
 	map = ft_calloc(lines - last + 1, sizeof(char *));
+	if (!map)
+		print_error_and_exit("Allocation Failled\n");
 	str = get_next_line(fd);
 	while (str)
 	{

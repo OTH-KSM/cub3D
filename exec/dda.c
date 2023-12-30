@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:27:53 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/30 18:16:15 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 19:02:41 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ void	horiz_touch(t_dda *t, t_data *data)
 {
 	if (t->is_up == 1)
 		t->y_horiz_touch--;
-	while (t->x_horiz_touch >= 0 && t->x_horiz_touch <= data->parse->height * TILE_SIZE
-		&& t->y_horiz_touch >= 0 && t->y_horiz_touch <= data->parse->width * TILE_SIZE)
+	while (t->x_horiz_touch >= 0 && t->x_horiz_touch
+		<= data->parse->height * TILE_SIZE
+		&& t->y_horiz_touch >= 0 && t->y_horiz_touch
+		<= data->parse->width * TILE_SIZE)
 	{
 		t->x_to_check = t->x_horiz_touch;
 		t->y_to_check = t->y_horiz_touch;

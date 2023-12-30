@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 13:45:13 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 21:45:09 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 19:12:24 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ int	check_dir_values(t_elist *elem)
 	{
 		len = ft_strlen(elem->value1);
 		if (len <= 4 || (len > 4 && strncmp(elem->value1 + len - 4, ".xpm", 4)))
-			return (print_error_and_return("Direction Path Are not Valid\n"));
+			return (print_error_and_return("Invalid Direciton Path\n"));
 		else if ((open(elem->value1, O_RDONLY)) == -1)
-			return (print_error_and_return("Direction Path Can't Open\n"));
+			return (print_error_and_return("Failled opennig Direction file\n"));
 	}
 	else
 	{

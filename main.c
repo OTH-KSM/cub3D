@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:15:36 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 22:21:15 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 19:01:28 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ void	init_mlx(t_data *img)
 	img->so = new_img(img, img->parse->so);
 	img->ea = new_img(img, img->parse->ea);
 	img->we = new_img(img, img->parse->we);
+	img->turn = 0;
+	img->move = 0;
 }
 
 int	main(int argc, char *argv[])
 {
-	t_final	parse;
 	t_data	img;
 
 	if (validate_input_and_file(argc, argv))

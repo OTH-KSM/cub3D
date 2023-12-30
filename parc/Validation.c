@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:06:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 21:44:49 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 19:08:38 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	validate_input_and_file(int argc, char *argv[])
 	len = ft_strlen(argv[1]);
 	if (len == 4 || ft_strncmp(argv[1] + len - 4, ".cub", 4))
 	{
-		write(2, "Error: File extention\n", 22);
+		write(2, "Error: Wrong file extention\n", 28);
 		return (-1);
 	}
 	fd = open(argv[1], O_RDONLY);

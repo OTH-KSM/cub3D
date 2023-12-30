@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 10:01:34 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 22:08:22 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 18:47:03 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ int		bibo_mlx_pixel_put(t_data *data, int x, int y);
 t_txt	*new_img(t_data *data, char *path);
 int		is_wall(t_data *data, long x_touch, long y_touch);
 int		check_ray(t_data *data, double x, double y);
-void	cast_all_rays(t_data *data, double x, double y);
+void	cast_all_rays(t_data *data);
 int		check_boundary(t_data *data, double add);
 double	count_distance(t_data *data, long x2, long y2);
 float	check_interception(t_data *data, double angle);

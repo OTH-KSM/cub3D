@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 15:54:22 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 21:47:57 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 18:40:13 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	dow(int fd, t_elist **elem)
 {
 	char	*line;
-	char	*tmp;
 	int		len;
 
 	line = get_next_line(fd);

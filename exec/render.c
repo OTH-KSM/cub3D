@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:48:36 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 22:07:48 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 19:03:40 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	select_texture(t_data *data, float angle)
 	return (imgx);
 }
 
-int	draw_walls(t_data *data, float wall_height, int imgX, int i)
+int	draw_walls(t_data *data, float wall_height, int i)
 {
 	float	distance_center_wall;
 	int		imgy;
@@ -71,7 +71,7 @@ void	draw_3d(t_data *data, float distance, int x, int imgX)
 	while (i < end)
 	{
 		my_mlx_pixel_put(data, x, i, (unsigned int)bibo_mlx_pixel_put
-			(data, imgX, draw_walls(data, wall_height, imgX, i)));
+			(data, imgX, draw_walls(data, wall_height, i)));
 		i++;
 	}
 	while (i < MAP_HEIGHT)
@@ -98,6 +98,6 @@ void	render_background(t_data *data)
 // obvious
 void	render_game(t_data *data)
 {
-	cast_all_rays(data, data->player_x, data->player_y);
+	cast_all_rays(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:24:25 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/30 12:52:55 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 19:18:13 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	pass_map(char **map, t_final *data, int lines)
 
 	i = 0;
 	data->map = ft_calloc(lines + 1, sizeof(char *));
+	if (data->map == NULL)
+		print_error_and_exit("Allocation Failed\n");
 	while (map[i])
 	{
 		tmp = ft_strtrim(map[i], "*");
@@ -81,7 +83,6 @@ t_final	*passing_the_data(t_elist *met, char **map, int lines)
 {
 	t_final	*data;
 	t_elist	*head;
-	char	*tmp;
 	int		i;
 
 	head = met;

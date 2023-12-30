@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 12:39:36 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/28 22:23:59 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 18:47:24 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_ray(t_data *data, double x, double y)
 
 // this function casts a MAP_data->parse.width of rays and draws the walls
 
-void	cast_all_rays(t_data *data, double x, double y) // not tested
+void	cast_all_rays(t_data *data)
 {
 	int		j;
 	int		i;
