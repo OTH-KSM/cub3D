@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 18:48:36 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/30 19:03:40 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 20:57:52 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ int	select_texture(t_data *data, float angle)
 	if (!data->check_test)
 	{
 		if (angle >= EA && angle < WE)
-			data->tmp = data->so;
+			data->tmp = data->ea;
 		else
-			data->tmp = data->no;
+			data->tmp = data->we;
 		imgx = (int)(data->hit_h_x * data->tmp->width / TILE_SIZE)
 			% data->tmp->width;
 	}
 	else
 	{
 		if (angle > SO && angle <= NO)
-			data->tmp = data->we;
+			data->tmp = data->no;
 		else
-			data->tmp = data->ea;
+			data->tmp = data->so;
 		imgx = (int)(data->hit_v_y * data->tmp->width / TILE_SIZE)
 			% data->tmp->width;
 	}

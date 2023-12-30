@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:17:05 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/28 18:19:15 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:03:58 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	itterate_the_map(char **map, int mapL)
 	{
 		j = 0;
 		if (ft_strchr(map[i], '+'))
-			print_error_and_exit("Map ends with newline\n");
+			print_error_and_exit("Newline inside the Map\n");
 		while (map[i][j])
 		{
 			if (map[i][j] == 'N' || map[i][j] == 'S'
@@ -35,7 +35,7 @@ void	itterate_the_map(char **map, int mapL)
 		i++;
 	}
 	if (count != 1)
-		print_error_and_exit("Multiplayers in the map\n");
+		print_error_and_exit("Missing or Multiplayers in the map\n");
 	if (pars_first_line(map, mapL) || pars_last_line(map, mapL)
 		|| pars_middle(map, mapL))
 		print_error_and_exit("Map validation failed\n");

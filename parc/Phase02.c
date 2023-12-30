@@ -6,13 +6,12 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 16:15:54 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/30 19:18:21 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 20:11:44 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header.h"
 
-//line 20 : if no line in the part of the map so print an error
 char	**check_map(int fd, int maxlen, int lines, int last)
 {
 	int		i;
@@ -49,7 +48,7 @@ char	*fill(char *str, int maxlen)
 	i = 0;
 	while (str[i] && str[i] != '\n')
 	{
-		if (!ft_strchr("NSwe10 ", str[i]))
+		if (!ft_strchr("NSWE10 ", str[i]))
 			print_error_and_exit("Wrong Character in the Map\n");
 		new[i] = str[i];
 		i++;

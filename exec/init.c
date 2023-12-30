@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 13:22:52 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/30 15:16:45 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 20:53:23 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	set_p_view(t_data *data, char direction)
 {
-	if (direction == 'E')
+	if (direction == 'W')
 		data->rotation_angle = 3 * M_PI / 2;
-	else if (direction == 'W')
+	else if (direction == 'E')
 		data->rotation_angle = M_PI / 2;
 	else if (direction == 'S')
 		data->rotation_angle = 0;

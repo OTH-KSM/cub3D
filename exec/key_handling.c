@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 15:29:35 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/30 15:37:31 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:09:57 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int	close_window(t_data *data)
 {
 	(void)data;
+	write(1, "The game is closed\n", 19);
 	exit(0);
 }
 

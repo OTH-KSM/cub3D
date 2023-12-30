@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/28 22:15:36 by okassimi          #+#    #+#             */
-/*   Updated: 2023/12/30 19:01:28 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 21:08:47 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char *argv[])
 	render_game(&img);
 	mlx_hook(img.mlx_win, 2, 1L << 0, press_down, &img);
 	mlx_hook(img.mlx_win, 3, 1L << 1, press_up, &img);
-	mlx_hook(img.mlx_win, 17, 0, press_down, &img);
+	mlx_hook(img.mlx_win, 17, 0, close_window, NULL);
 	mlx_loop_hook(img.mlx, &key_hook1, &img);
 	mlx_put_image_to_window(img.mlx, img.mlx_win, img.img, 0, 0);
 	mlx_loop(img.mlx);
