@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:27:53 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/30 13:08:44 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 18:16:15 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ using DDA
 
 void	horiz_touch(t_dda *t, t_data *data)
 {
-	t->x_horiz_touch = t->x_horiz_intercept;
-	t->y_horiz_touch = t->y_horiz_intercept;
 	if (t->is_up == 1)
 		t->y_horiz_touch--;
 	while (t->x_horiz_touch >= 0 && t->x_horiz_touch <= data->parse->height * TILE_SIZE

@@ -1,4 +1,5 @@
-CFLAGS = #-fsanitize=address -g3
+CC = gcc
+CFLAGS = #-Wall -Wextra -Werror
 PSRC = parc/Validation.c parc/Phase01.c parc/Phase02.c parc/Phase03.c parc/PassData.c parc/Phase01_ut.c parc/add_fun01.c parc/add_fun02.c
 ESRC = exec/check_funct.c exec/dda.c exec/draw_func.c exec/init.c exec/key_handling.c exec/render.c exec/dda_init.c
 GSRC = main.c #global functions
@@ -20,7 +21,7 @@ $(LIBFT) : $(OLIBFT)
 
 clean :
 	-@echo "Cleaning up object files..."
-	@make clean -C libft -s
+	make clean -C libft
 	@rm -f $(OBJ)
 
 fclean : clean

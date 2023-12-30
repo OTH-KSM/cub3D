@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: omarchic <omarchic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:22:50 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/27 18:47:45 by omarchic         ###   ########.fr       */
+/*   Updated: 2023/12/30 18:16:37 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,6 @@ void	init_dda(t_dda *t, t_data *data, double angle)
 	}
 	t->x_horiz_intercept = data->player_x + ((t->y_horiz_intercept
 				- data->player_y) / tan(t->ray_angle));
+	t->x_horiz_touch = t->x_horiz_intercept;
+	t->y_horiz_touch = t->y_horiz_intercept;
 }
