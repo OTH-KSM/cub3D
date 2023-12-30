@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 18:27:53 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/28 19:22:05 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 13:08:44 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	horiz_touch(t_dda *t, t_data *data)
 	t->y_horiz_touch = t->y_horiz_intercept;
 	if (t->is_up == 1)
 		t->y_horiz_touch--;
-	while (t->x_horiz_touch >= 0 && t->x_horiz_touch <= MAP_WIDTH
-		&& t->y_horiz_touch >= 0 && t->y_horiz_touch <= MAP_HEIGHT)
+	while (t->x_horiz_touch >= 0 && t->x_horiz_touch <= data->parse->height * TILE_SIZE
+		&& t->y_horiz_touch >= 0 && t->y_horiz_touch <= data->parse->width * TILE_SIZE)
 	{
 		t->x_to_check = t->x_horiz_touch;
 		t->y_to_check = t->y_horiz_touch;
@@ -77,8 +77,10 @@ void	init_dda2(t_dda *t, t_data *data)
 
 void	vertical_touch(t_dda *t, t_data *data)
 {
-	while (t->x_verti_touch >= 0 && t->x_verti_touch <= MAP_WIDTH
-		&& t->y_verti_touch >= 0 && t->y_verti_touch <= MAP_HEIGHT)
+	while (t->x_verti_touch >= 0 && t->x_verti_touch
+		<= data->parse->height * TILE_SIZE
+		&& t->y_verti_touch >= 0 && t->y_verti_touch
+		<= data->parse->width * TILE_SIZE)
 	{
 		t->x_to_check = t->x_verti_touch;
 		t->y_to_check = t->y_verti_touch;

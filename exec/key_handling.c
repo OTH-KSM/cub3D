@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 15:29:35 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/28 22:23:35 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/28 22:26:20 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int	key_hook1(t_data *data)
 	if (rotate != 1)
 	{
 		data->player_x += cos(data->rotation_angle + rotate) * 10;
-		data->player_y += sin(data->rotation_angle + rotate) * 10;// 5
+		data->player_y += sin(data->rotation_angle + rotate) * 10;
 	}
 	render_game(data);
 	return (0);
