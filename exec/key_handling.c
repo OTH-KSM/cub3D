@@ -6,7 +6,7 @@
 /*   By: okassimi <okassimi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/27 15:29:35 by omarchic          #+#    #+#             */
-/*   Updated: 2023/12/28 22:26:20 by okassimi         ###   ########.fr       */
+/*   Updated: 2023/12/30 15:37:31 by okassimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,15 @@ int	key_hook1(t_data *data)
 	rotate = 1;
 	if (data->move == 1 && check_boundary(data, 0) == 0)
 		rotate = 0;
-	else if (data->turn == 1)
+	if (data->turn == 1)
 		data->rotation_angle += 0.05;
-	else if (data->move == -1 && check_boundary(data, M_PI) == 0)
+	if (data->move == -1 && check_boundary(data, M_PI) == 0)
 		rotate = M_PI;
-	else if (data->turn == -1)
+	if (data->turn == -1)
 		data->rotation_angle -= 0.05;
-	else if (data->move == 2 && check_boundary(data, M_PI / 2) == 0)
+	if (data->move == 2 && check_boundary(data, M_PI / 2) == 0)
 		rotate = M_PI / 2;
-	else if (data->move == 3 && check_boundary(data, -M_PI / 2) == 0)
+	if (data->move == 3 && check_boundary(data, -M_PI / 2) == 0)
 		rotate = -M_PI / 2;
 	if (rotate != 1)
 	{
